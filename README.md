@@ -5,7 +5,7 @@ Edit is a configurable application template that enables you to provide basic ed
 
 ![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/edit_th.jpg)
 
-[View it live](http://www.arcgis.com/apps/Edit/index.html?webmap=1df512c380994cc5a3dad2e2d428eea3)
+[View it live](http://www.arcgis.com/apps/Edit/index.html?webmap=25977874c66c4c0a8dcc181506c6fb45)
 
 
 #Features
