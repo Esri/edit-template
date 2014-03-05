@@ -54,18 +54,54 @@
         /*was set to height 90%*/
     }
     
-    
     .templatePicker .tooltip {
       display: none;
     }
 
-    
     #map {
      border-left:solid 1px #999;
      border-right:solid 1px #999;
      height:100%;
      padding: 0px;
     }
+
+    #snapDiv {
+        margin-left: 2px;
+        margin-right: 2px;
+        margin-top: 10px;
+    }
+
+    #snap_table {
+      border-collapse:collapse;
+    }
+
+    #snap_table td {
+      border: 1px solid #000000;
+      max-width: 135px;
+      padding: 3px 3px 2px;
+      text-align: center;
+      word-wrap: break-word;
+    }
+
+    #snap_table th {
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+    }
+
+    #snap_table tr.alt {
+      background-color:lightgray;
+    }
+
+    .snapCheck {
+        text-align: center;
+    }
+
+    .snapIntro {
+        padding-top: 5px;
+        font-size: 14px;
+    }
+    
 
   .mobile #header{
     height:30px;

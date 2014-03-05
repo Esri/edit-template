@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -62,7 +62,8 @@
         "esri/symbols/SimpleMarkerSymbol",
         "esri/symbols/SimpleLineSymbol",
         "esri/dijit/Legend",
-        "esri/graphic"
+        "esri/graphic",
+        "esri/SnappingManager"
         ],
         function(
             parser, 
@@ -88,7 +89,8 @@
             SimpleMarkerSymbol,
             SimpleLineSymbol,
             Legend,
-            Graphic
+            Graphic,
+            SnappingManager
           ){
 
             
@@ -97,7 +99,7 @@
 
 
               var defaults = {
-                  webmap: "25977874c66c4c0a8dcc181506c6fb45",
+                  webmap: "10b35a5e755b4004bec40ae1e29d25da",
                   bingmapskey: config.bingMapsKey,
                   sharingurl: "",
                   theme: "blue",  //blue, green black
@@ -193,129 +195,174 @@
 
 
                 var editableLayers = [];
+                var featureLayers = [];
                 array.forEach(layers, function(layer){
 
                     if(layer &&  layer.layerObject ){
 
                         var eLayer = layer.layerObject;
- 
-                        if(eLayer instanceof esri.layers.FeatureLayer && eLayer.isEditable()){
-                            if(eLayer.capabilities && eLayer.capabilities === "Query"){
-                              //is capabilities set to Query if so then editing was disabled in the web map so 
-                              //we won't add to editable layers.
-                            }else{
-                              editableLayers.push({'featureLayer' : eLayer});
-                            }
-     
                         
-
+                        if(eLayer instanceof esri.layers.FeatureLayer){ 
+                            featureLayers.push(eLayer);
+                            if (eLayer.isEditable()) {
+                                if (eLayer.capabilities && eLayer.capabilities === "Query") {
+                                    //is capabilities set to Query if so then editing was disabled in the web map so 
+                                    //we won't add to editable layers.
+                                } else {
+                                    editableLayers.push({ 'featureLayer': eLayer });
+                                }
+                            }
                         }
-
                     }
                 });
 
 
                 var content = domConstruct.create("div",{id:"editorDiv"});
                 window.appcontent.setPanelContent(window.options.i18n.viewer.content_title , content , "240px").then(function(){
-
-                //if there are not any editable layers show message. If there are layers then build content for left panel.
-                if(editableLayers.length  < 1){
-                    dom.byId("editorDiv").innerHTML = window.options.i18n.viewer.errors.no_editable_layers_message;
-                }else{
-
-                 //add field infos if applicable - this will contain hints if defined in the popup. Also added logic to hide fields that have visible = false. The popup takes 
-                 //care of this for the info window but not for the edit window. 
-                 array.forEach(editableLayers, function(layer){
-                    if(layer.featureLayer && layer.featureLayer.infoTemplate && layer.featureLayer.infoTemplate.info && layer.featureLayer.infoTemplate.info.fieldInfos){
-                        //only display visible fields 
-                        var fields = layer.featureLayer.infoTemplate.info.fieldInfos;
-        
-                        var fieldInfos = [];
-                        array.forEach(fields, function(field){
-                          if(field.visible){
-                            fieldInfos.push(field);
-                          }
-                        });
-                        layer.fieldInfos = fieldInfos;
-                    }
-                 });
-                    //need to create the panel for the mobile case
-                    window.appcontent.showPanelContent();
-                    window.map.reposition();
-                    window.map.resize();
-
-                    //display the toolbar if the configuration option has been enabled and the site isn't mobile.
-                    var settings = {
-                      map: window.map,
-                      layerInfos: editableLayers,
-                      toolbarVisible: (window.options.displaytoolbar && !window.appcontent.isMobile) ? true : false
-                    };
-
-                    var params = {
-                      settings: settings
-                    };
-
-                    //create the editor, apply snapping and disable the tooltips for the template picker
-                    var editorWidget = new Editor(params, dom.byId('editorDiv'));
-                    var options = {snapKey:dojo.keys.copyKey};
-
-                    window.map.enableSnapping();
-                    if(!dojo.isIE){
-                      adjustPopup();
-                    }
-
-                    editorWidget.templatePicker.showTooltip = false;
-
-                    editorWidget.startup();
-
-                   if(editorWidget.templatePicker.featureLayers.length === 0){
-        
-                      //no editable layers so let's hide the template picker and add the legend widget.
-                      domStyle.set(dom.byId("editorDiv"),"height","20px");
-                      query(".templatePicker").style("display","none");
-
-                      var legend = new Legend({
-                        map: window.map,
-                        layerInfos: arcgisUtils.getLegendLayers(response)
-                      },domConstruct.create("div",{id:"legendDiv",className:'esriLegend'},dom.byId("leftPane"), "last"));
                     
-                      legend.startup();
- 
-                    }
+                    //if there are not any editable layers show message. If there are layers then build content for left panel.
+                    if(editableLayers.length  < 1){
+                        dom.byId("editorDiv").innerHTML = window.options.i18n.viewer.errors.no_editable_layers_message;
+                    } else {
+                        
+                        //add field infos if applicable - this will contain hints if defined in the popup. Also added logic to hide fields that have visible = false. The popup takes 
+                        //care of this for the info window but not for the edit window. 
+                        array.forEach(editableLayers, function(layer){
+                            if(layer.featureLayer && layer.featureLayer.infoTemplate && layer.featureLayer.infoTemplate.info && layer.featureLayer.infoTemplate.info.fieldInfos){
+                                //only display visible fields 
+                                var fields = layer.featureLayer.infoTemplate.info.fieldInfos;
+        
+                                var fieldInfos = [];
+                                array.forEach(fields, function(field){
+                                    if(field.visible){
+                                    fieldInfos.push(field);
+                                    }
+                                });
+                                layer.fieldInfos = fieldInfos;
+                            }
+                        });
+                        //need to create the panel for the mobile case
+                        window.appcontent.showPanelContent();
+                        window.map.reposition();
+                        window.map.resize();
 
+                        //display the toolbar if the configuration option has been enabled and the site isn't mobile.
+                        var settings = {
+                          map: window.map,
+                          layerInfos: editableLayers,
+                          toolbarVisible: (window.options.displaytoolbar && !window.appcontent.isMobile) ? true : false
+                        };
 
-                    //if it's a mobile site you can add additional buttons to the header - geolocation is one option
-                    //that might make sense for mobile.
-                    if(window.appcontent.isMobile){
-                        window.appcontent.hidePanelContent();
+                        var params = {
+                          settings: settings
+                        };
 
-                        //add an additional  button to the header. This method accepts text and/or an image. If an image url is supplied that image
-                        //will be used as the button icon. Can add more that one button using the addMobileButton method. Additional buttons will
-                        //display on the right side.
-                        var btn = window.appcontent.addMobileButton("geo" , "images/gps.png");
+                        //create the editor, apply snapping and disable the tooltips for the template picker
 
-                        on(btn, "click", function(){
-                            if(navigator.geolocation){
-                                navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
+                        var editorWidget = new Editor(params, dom.byId("editorDiv"));
+                        var snapDiv = domConstruct.create("div", { id: "snapDiv"}, dom.byId("editorDiv"));
+                        domConstruct.create("div", { innerHTML: "Press the <B>Ctrl</B> key to disable snapping.", class: "snapIntro" }, snapDiv);
+                        domConstruct.create("div", { innerHTML: "Snapping settings:", class: "snapIntro" }, snapDiv);
+                        var counter = 0;
+                        var snapTable = domConstruct.create("table", { id: "snap_table" }, snapDiv);
+                        snapTable.appendChild(domConstruct.toDom("<tr><th>Layer</th><th>Vertex</th><th>Edge</th></tr>"));
+                        array.forEach(featureLayers, function (fLayer) {
+                            counter += 1
+                            var snapRow;
+                            if (counter % 2 == 0) {
+                                snapRow = domConstruct.create("tr", { id: fLayer.layerId + "_tr", class: "alt" }, snapTable);
+                            }
+                            else {
+                                snapRow = domConstruct.create("tr", { id: fLayer.layerId + "_tr" }, snapTable);
                             }
 
+                            var layerTD = domConstruct.create("td", { id: fLayer.layerId + "_td", innerHTML: fLayer.name }, snapRow);
+
+                            if (fLayer.geometryType == "esriGeometryPoint") {
+                                fLayer.snapCheckVertex = domConstruct.create("input", { type: "checkBox", id: "snp_" + fLayer.id + "0", checked: true, class: "snapCheck" }, domConstruct.create("td", null, snapRow));
+                                domConstruct.create("td", null, snapRow);
+                            }
+                            else {
+                                fLayer.snapCheckVertex = domConstruct.create("input", { type: "checkBox", id: "snp_" + fLayer.id + "0", checked: true, class: "snapCheck" }, domConstruct.create("td", null, snapRow));
+                                fLayer.snapCheckEdge = domConstruct.create("input", { type: "checkBox", id: "snp_" + fLayer.id + "1", checked: true, class: "snapCheck" }, domConstruct.create("td", null, snapRow));
+                            }
+                            
+                        });
+                        
+                        var options = { alwaysSnap: true, snapKey:dojo.keys.copyKey }  //{snapKey:dojo.keys.copyKey};
+
+                        var snapManager = window.map.enableSnapping(options);
+
+                        query(".snapCheck").on("change", function (evt) {
+                            var layerInfos = []
+                            array.forEach(featureLayers, function (fLayer) {
+                                if (fLayer.geometryType == "esriGeometryPoint") {
+                                    layerInfos.push({ layer: fLayer, snapToPoint: fLayer.snapCheckVertex.checked, snapToVertex: false, snapToEdge: false });
+                                }
+                                else {
+                                    layerInfos.push({ layer: fLayer, snapToPoint: false, snapToVertex: fLayer.snapCheckVertex.checked, snapToEdge: fLayer.snapCheckEdge.checked });
+                                }
+                                
+                            });
+                            snapManager.setLayerInfos(layerInfos);
                         });
 
+                        if(!dojo.isIE){
+                          adjustPopup();
+                        }
 
-                        //when template picker selection changes close window
-                        conn.connect(editorWidget.templatePicker, "onSelectionChange", function(){
+                        editorWidget.templatePicker.showTooltip = false;
+
+                        editorWidget.startup();
+
+                       if(editorWidget.templatePicker.featureLayers.length === 0){
+        
+                          //no editable layers so let's hide the template picker and add the legend widget.
+                          domStyle.set(dom.byId("editorDiv"),"height","20px");
+                          query(".templatePicker").style("display","none");
+
+                          var legend = new Legend({
+                            map: window.map,
+                            layerInfos: arcgisUtils.getLegendLayers(response)
+                          },domConstruct.create("div",{id:"legendDiv",className:'esriLegend'},dom.byId("leftPane"), "last"));
+                    
+                          legend.startup();
+ 
+                        }
+
+
+                        //if it's a mobile site you can add additional buttons to the header - geolocation is one option
+                        //that might make sense for mobile.
+                        if(window.appcontent.isMobile){
                             window.appcontent.hidePanelContent();
-                        });
-                        //listen for info window and maximize
-                        conn.connect(window.map.infoWindow, "onShow", function(){
-                            window.map.infoWindow.maximize();
-                        });
+
+                            //add an additional  button to the header. This method accepts text and/or an image. If an image url is supplied that image
+                            //will be used as the button icon. Can add more that one button using the addMobileButton method. Additional buttons will
+                            //display on the right side.
+                            var btn = window.appcontent.addMobileButton("geo" , "images/gps.png");
+
+                            on(btn, "click", function(){
+                                if(navigator.geolocation){
+                                    navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
+                                }
+
+                            });
 
 
+                            //when template picker selection changes close window
+                            conn.connect(editorWidget.templatePicker, "onSelectionChange", function(){
+                                window.appcontent.hidePanelContent();
+                            });
+                            //listen for info window and maximize
+                            conn.connect(window.map.infoWindow, "onShow", function(){
+                                window.map.infoWindow.maximize();
+                            });
+
+
+
+                        }
 
                     }
-
-                }
 
                 });
 
@@ -402,5 +449,4 @@
 
   <body class="claro">
 
-  </body>
 </html>
