@@ -157,7 +157,7 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
                 }, this._contentPaneCenterNode);
                 this._borderContainer.addChild(this._contentPaneCenter);
                 // leading panel
-                this._contentPaneSide = new ContentPane({
+                this._contentPaneSide = new BorderContainer({
                     region: 'leading',
                     style: {
                         padding: 0
@@ -166,14 +166,16 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
 
                 this._borderContainer.addChild(this._contentPaneSide);
 
-
                 var editor = new ContentPane({
                     id: "editorStack",
+                    region:"center",
+                    style:"height:100%",
                     className: "fc",
                     title: "Editor",
                     content: "<div id='editorDiv'></div>"
                 });
                 this._contentPaneSide.addChild(editor);
+
 
 
                 // start border container
