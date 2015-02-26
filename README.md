@@ -5,25 +5,41 @@ Edit is a configurable application template that enables you to provide basic ed
 
 ![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/edit_th.jpg)
 
-[View it live](http://www.arcgis.com/apps/Edit/index.html?webmap=25977874c66c4c0a8dcc181506c6fb45)
+[View it live](http://www.arcgis.com/apps/Editor/index.html?webmap=25977874c66c4c0a8dcc181506c6fb45)
 
 
 #Features
 **Edit** is a configurable application template that enables you to provide basic editing capabilites for editable layers in a web map. The template can be configured using the following options:
 
 - **Map:**Choose the web map used in your application.
-- **Color Scheme:** Choose the application color scheme (Blue, Black, or Green).
+- **Color Scheme:** Choose the application color scheme by defining custom colors.
+- **Search:** Enable the geocoder widget and optionally specify one or more search layers and fields. 
+- **Locate:** Enable a 'Locate Me' button. Optionally specify that tracking will be enabled which tracks the users current location. 
+- **Basemap Toggle:** Add the Basemap Toggle widget to the application. This widget allows you to toggle between your map's basemap and an alternate basemap. 
 - **Show Toolbar:**Display an editing toolbar.
 
 
-#Instructions
+## Instructions
 
-1. Download and unzip the .zip file or clone the repo. 
-2. Web-enable the directory
-3. Access the .html page 
-4. See the readme.html page for more details. 
+1. Download and unzip the .zip file or clone the repository.
+2. Web-enable the directory.
+3. Access the .html page.
+4. Start writing your template!
 
+[New to Github? Get started here.](https://github.com/)
 
+## Deploying
+
+1. To deploy this application, download the template from Portal/ArcGIS Online and unzip it.
+2. Copy the unzipped folder containing the web app template files, such as index.html, to your web server. You can rename the folder to change the URL through which users will access the application. By default the URL to the app will be `http://<Your Web Server>/<app folder name>/index.html`
+3. Change the sharing host, found in defaults.js inside the config folder for the application, to the sharing URL for ArcGIS Online or Portal. For ArcGIS Online users, keep the default value of www.arcgis.com or specify the name of your organization.
+  - ArcGIS Online Example:  `"sharinghost": location.protocol + "//" + “<your organization name>.maps.arcgis.com`
+  - Portal Example where `arcgis` is the name of the Web Adaptor: `"sharinghost": location.protocol + "//" + "webadaptor.domain.com/arcgis"`
+4. If you are using Portal or a local install of the ArcGIS API for JavaScript, change all references to the ArcGIS API for JavaScript in index.html to refer to your local copy of the API. Search for the references containing `"//js.arcgis.com/3.13"` and replace this portion of the reference with the url to your local install.
+  - For example: `"//webadaptor.domain.com/arcgis/jsapi/jsapi"` where `arcgis` is the name of your Web Adaptor.
+5. Copy a map or group ID from Portal/ArcGIS Online and replace the default web map ID in the application’s default.js file. You can now run the application on your web server or customize the application further.
+
+> **Note:** If your application edits features in a feature service, contains secure services or web maps that aren't shared publicly, or generate requests that exceed 200 characters, you may need to set up and use a proxy page. Common situations where you may exceed the URL length are using complex polygons as input to a task or specifying a spatial reference using well-known text (WKT). For details on installing and configuring a proxy page see [Using the proxy](https://developers.arcgis.com/javascript/jshelp/ags_proxy.html). If you do not have an Internet connection, you will need to access and deploy the ArcGIS API for JavaScript documentation from [developers.arcgis.com](https://developers.arcgis.com/).
 #Requirements
 
 - Notepad or HTML editor

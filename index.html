@@ -1,376 +1,85 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- On iOS, as part of optimizing your web application, have it use the
-    standalone mode to look more like a native application. When you use this
-    standalone mode, Safari is not used to display the web content�specifically,
-    there is no browser URL text field at the top of the screen or button bar
-    at the bottom of the screen. -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <!-- Controls the dimensions and scaling of the browser this in iOS,
-    Android, webOS, Opera Mini, Opera Mobile and Blackberry. width: controls
-    the width of the viewport initial-scale: controls the zoom level when the
-    page is first loaded maximum-scale: control how users are allowed to zoom
-    the page in or out user-scalable: control how users are allowed to zoom
-    the page in or out -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <!-- Sets the style of the status bar for a web application when in standalone mode -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <title></title>
 
-    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.11/esri/css/esri.css">
-    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.11/dijit/themes/claro/claro.css">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <!-- Define the versions of IE that will be used to render the page. See Microsoft documentation for details. Optional. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- End Responsive -->
+  <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
+  <link rel="stylesheet" href="//js.arcgis.com/3.13//dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="//js.arcgis.com/3.13/esri/css/esri.css">
+  <!-- Load any application specific styles -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
 
-    <link rel="stylesheet"  href="css/layout.css"/>
-    <script type="text/javascript">
-      var path_location = location.pathname.replace(/\/[^/]+$/, '');
-      var dojoConfig = {
-        parseOnLoad: true,
-        packages: [ {
-              name: "utilities",
-              location: path_location + '/javascript'
-             },{
-              name: "config",
-              location: path_location
-             }
-        ]
-      };
-    </script>
-    <script type="text/javascript" src="//js.arcgis.com/3.11/"></script>
-
-    <script type="text/javascript">
+<body class="claro app-loading">
+  <div class="loading-indicator">
+    <div class="loading-message" id="loading_message"></div>
+  </div>
+  <!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
+       <div id="border_container" class="border-container-outer">
+        <div id="cp_left" class="content-pane-left">
+        </div>
+        <div id="cp_center" class="content-pane-center">
+            <div class="top-bar bg fc">
+                <div id="toggle_button" class="hamburger-button icon-edit"></div>
+                <h1 id="title"></h1>
+            </div>
+           <div id="mapDiv" dir="ltr"></div>
+        </div>
+    </div>
+  <script type="text/javascript">
+    var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+    var dojoConfig = {
+      async: true,
+      // The locationPath logic below may look confusing but all its doing is
+      // enabling us to load the api from a CDN and load local modules from the correct location.
+      packages: [{
+        name: "application",
+        location: package_path + '/js'
+            }, {
+        name: "config",
+        location: package_path + '/config'
+            }, {
+        name: "arcgis_templates",
+        location: package_path + '/..'
+            }]
+    };
+  </script>
+  <script type="text/javascript" src="//js.arcgis.com/3.13/"></script>
+  <script type="text/javascript">
     require([
-        "dojo/parser",
-        "dojo/ready",
-        "dojo/_base/lang",
-        "dojo/_base/Color",
-        "dojo/dom",
-        "dojo/query",
-        "dojo/on",
-        "dojo/dom-style",
-        "dojo/_base/array",
-        "dojo/dom-construct",
-        "dojo/dom-geometry",
-        "utilities/app",
-        "utilities/CreateContent",
-        "utilities/CreateGeocoder",
-        "config/commonConfig",
-        "dojo/_base/Deferred",
-        "esri/arcgis/utils",
-        "esri/layers/FeatureLayer",
-        "esri/geometry/Point",
-        "esri/symbols/SimpleMarkerSymbol",
-        "esri/symbols/SimpleLineSymbol",
-        "esri/dijit/Legend",
-        "esri/graphic",
-        "esri/lang"
-        ],
-        function(
-            parser,
-            ready,
-            lang,
-            Color,
-            dom,
-            query,
-            on,
-            domStyle,
-            array,
-            domConstruct,
-            domGeometry,
-            App,
-            Content,
-            CreateGeocoder,
-            config,
-            Deferred,
-            arcgisUtils,
-            FeatureLayer,
-            Point,
-            SimpleMarkerSymbol,
-            SimpleLineSymbol,
-            Legend,
-            Graphic,
-            esriLang
-          ){
+            "config/templateConfig",
+            "application/template",
+            "application/main"
+        ], function (
+      templateConfig,
+      Template,
+      Main
+    ) {
+      // create the template. This will take care of all the logic required for template applications
+      var myTemplate = new Template(templateConfig);
+      // create my main application. Start placing your logic in the main.js file.
+      var myApp = new Main();
+      // start template
+      myTemplate.startup().then(function (config) {
+        // The config object contains the following properties: helper services, (optionally)
+        // i18n, appid, webmap and any custom values defined by the application.
+        // In this example we have one called theme.
+        myApp.startup(config);
+      }, function (error) {
+        // something went wrong. Let's report it.
+        myApp.reportError(error);
+      });
+    });
+  </script>
+</body>
 
-
-            ready (function() {
-
-
-
-              var defaults = {
-                  "webmap":"25977874c66c4c0a8dcc181506c6fb45",
-                  "bingmapskey": config.bingMapsKey,
-                  "sharingurl":  document.location.protocol + "//www.arcgis.com",
-                  "theme": "blue",  //blue, green black
-                  "proxyurl": "",
-                  "home_button": true,
-                  "locate_button": true,
-                  "geocoder": true,
-                  "helperServices":config.helperServices
-              };
-
-
-              var supportsLocalization = true;
-              var app = new App(defaults,supportsLocalization);
-              on(app, "ready", lang.hitch(this, function(config){
-
-                 this.options = config;
-
-
-                //apply the specified theme
-                  var ss = document.createElement("link");
-                  ss.type = "text/css";
-                  ss.rel = "stylesheet";
-                  ss.href = "css/" + options.theme + ".css";
-                  document.getElementsByTagName("head")[0].appendChild(ss);
-
-
-                  //Build the user interface for the application. In this case it's a simple app with a header, content and a left (or floating) panel
-                  this.appcontent = new Content(this.options);
-                  this.appcontent.createLayout().then(function(){
-                    var itemInfo = this.options.itemInfo || this.options.webmap;
-                    createMap(itemInfo);
-                  });
-
-
-              }));
-
-
-
-             function createMap(itemInfo){
-                  var mapDeferred = arcgisUtils.createMap(itemInfo, "map", {
-                    bingMapsKey: this.options.bingmapskey,
-                    editable: true
-
-                  });
-                  mapDeferred.then(function(response){
-
-                    //Hold on to the click event handler because we might want to disconnect popup clicks
-
-
-                    this.appcontent.handler = response.clickEventHandle;
-
-
-                    this.map = response.map;
-
-
-                    //set the title and subtitle in the app's header
-                    document.title = this.options.title || response.itemInfo.item.title;
-                    dom.byId("title").innerHTML = this.options.title || response.itemInfo.item.title;
-                    if(dom.byId("subtitle")){
-                        dom.byId("subtitle").innerHTML =  this.options.subtitle || response.itemInfo.item.snippet || "";
-                    }
-
-
-                   if(this.map.loaded){
-                    initUI(response);
-                   }else{
-                    on(this.map, "load", function(){
-                        initUI(response);
-                    });
-                   }
-
-
-                  }, function (error){
-
-                        alert(this.options.i8n.viewer.errors.message + " : " + error.message);
-                  });
-
-             }
-
-
-
-            function initUI(response){
-
-               var supportsOrientationChange = "onorientationchange" in this,
-                orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
-                //IE8 doesn't support addEventListener so check before calling
-                if(this.addEventListener){
-                  this.addEventListener(orientationEvent, function () {
-                    orientationChanged();
-                  }, false);
-                }
-
-
-                  //add home button if enabled
-                 if(this.options.home_button){//Add the home button to the small slider
-                     require(["esri/dijit/HomeButton", "dojo/query"], lang.hitch(this,function(HomeButton,query){
-                        var homeButton = new HomeButton({
-                            map: this.map
-                        }, domConstruct.create("div",{},query(".esriSimpleSliderIncrementButton")[0], "after"));
-                        homeButton.startup();
-                    }));
-                 }
-
-                 //add address search if enabled
-                 if(this.options.geocoder){
-                    var options = {
-                        map: this.map,
-                        config: this.options,
-                        content: this.appcontent
-                    }
-                    var myGeocoder = new CreateGeocoder(options);
-                    if(myGeocoder.geocoder && myGeocoder.geocoder.domNode){
-                     domConstruct.place(myGeocoder.geocoder.domNode, "map", "last");
-                    }
-                 }
-
-
-
-
-   				 var content = domConstruct.create("div",{id:"editorDiv"});
-                //create the Legend or Editor
-                var editableLayers = this.appcontent.getEditableLayers(response.itemInfo.itemData.operationalLayers, this.map);
-
-                //edit permissions
-                var editable = true;
-                var content_title = this.options.i18n.viewer.content_title;
-                if(esriLang.isDefined(this.options.userPrivileges)){
-                    if(array.indexOf(this.options.userPrivileges, "features:user:edit") === -1){
-                        editable = false;
-                        //change the title to legend
-                        content_title = content_title = this.options.i18n.viewer.legend_title;
-                    }
-                } else if(editableLayers.length === 0){
-                	//change the title to legend
-                    content_title = content_title = this.options.i18n.viewer.legend_title;
-                }
-                this.appcontent.setPanelContent(content_title , content , "240px").then(lang.hitch(this,  function(){
-
-                    this.map.reposition();
-                    this.map.resize();
-
-
-
-                    if(editableLayers.length === 0 || !editable){
-
-                        console.log(this.options.i18n.viewer.errors.no_editable_layers_message);
-                        var legend = new Legend({
-                          map: this.map,
-                          layerInfos: arcgisUtils.getLegendLayers(response)
-                       },domConstruct.create("div",{},dom.byId("editorDiv")));
-
-                        legend.startup();
-
-                    }else{ //can edit
-    				  if(!this.appcontent.isMobile){
-                    	this.appcontent.createEditor();
-    				  }
-                      if(!dojo.isIE){
-                        adjustPopup();
-                      }
-
-                    }
-
-                    //add the location button if enabled.
-                    if(this.options.locate_button){
-                      require(["esri/dijit/LocateButton"], lang.hitch(this,function(LocateButton){
-                          //add the location button as a child of the map div. This button
-                          //is positioned using css. Search main.css for the locateDiv selector
-                          var locateDiv = domConstruct.create("div",{id:"locateDiv"},"map");
-                          var locationButton = new LocateButton({
-                              map: this.map
-                          },locateDiv);
-                          locationButton.startup();
-                      }));
-                   }
-
-                  if(this.appcontent.isMobile){
-
-                    //listen for info this and maximize
-                     on(this.map.infoWindow, "show", function(){
-                        this.map.infoWindow.maximize();
-
-                      });
-
-                  }
-
-               }));
-
-            }
-
-
-            function zoomToLocation(location){
-              //Add  a graphic to the map to show the current location. Location is determined using geolocation api
-              this.map.graphics.clear();
-              var pt = new Point(location.coords);
-              var symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 12,
-                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-                    new  Color([102, 255, 255, 0.5]), 8),
-                    new  Color([102, 255, 255, 0.9])
-                  );
-              graphic = new Graphic(pt, symbol);
-              map.graphics.add(graphic);
-              var zoom = this.map.getZoom() || 12;
-              map.centerAndZoom(pt, zoom);
-            }
-
-            function locationError(error){
-
-              switch (error.code) {
-              case error.PERMISSION_DENIED:
-                alert("Location not provided");
-                break;
-
-              case error.POSITION_UNAVAILABLE:
-                alert("Current location not available");
-                break;
-
-              case error.TIMEOUT:
-                alert("Timeout");
-                break;
-
-              default:
-                alert("unknown error");
-                break;
-              }
-            }
-
-            function adjustPopup() {
-              var box = domGeometry.getContentBox(this.map.container);
-
-              var width = 270, height = 300, // defaults
-                  newWidth = Math.round(box.w * 0.60),
-                  newHeight = Math.round(box.h * 0.45);
-              if (newWidth < width) {
-                width = newWidth;
-              }
-
-              if (newHeight < height) {
-                height = newHeight;
-              }
-
-               this.map.infoWindow.resize(width, height);
-            }
-
-
-
-            function orientationChanged() {
-              if (this.map) {
-                if(this.appcontent.isMobile){
-                    //resize the info this if displayed.
-                    if(this.map.infoWindow.isShowing){
-                        this.map.infoWindow.reposition();
-                        this.map.infoWindow.maximize();
-                    }
-                }
-                this.map.reposition();
-                this.map.resize();
-              }
-            }
-
-
-        });
-
-
-        });
-
-
-    </script>
-  </head>
-
-  <body class="claro">
-
-  </body>
 </html>
