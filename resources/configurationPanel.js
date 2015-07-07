@@ -1,8 +1,11 @@
 {  
-   "configurationSettings":[  
+   "configurationSettings":[
       {  
-         "category":"<b>Map Settings</b>",
-         "fields":[  
+         "category":"<b>App Settings</b>",
+         "fields":[ 
+            {
+               "type": "appproxies"
+            }, 
             {  
                "type":"webmap"
             },
@@ -33,48 +36,18 @@
       },{
          "category": "Search Settings",
          "fields":[
-            {  
+            {
                "type":"paragraph",
-               "value":"Enable the search capability and optionally select search layers and fields. These layers will appear in the search tool allowing application users to search for particular values in the specified layers and fields."
+               "value": "Enable search to allow users to find a location or data in the map. Configure the search settings to refine the experience in your app by setting the default search resource, placeholder text, etc."
             },
             {  
                "type":"boolean",
                "fieldName":"search",
-               "label":"Address Finder"
-            },
-            {  
-               "type":"boolean",
-               "fieldName":"searchExtent",
-               "label":"Prioritize search results in current extent."
+               "label":"Enable search tool"
             },{
-               "type":"paragraph",
-               "value": "When Location Search is true the search widget will allow users to search for addresses and locations using one or more locators and also search the layers and fields specified in the Search Layers configuration option. Unchecking the Location Search option will remove the locator search and only configured search layers will be displayed."
-            },{
-               "type": "boolean",
-               "fieldName": "locationSearch",
-               "label": "Location Search"
-            },
-            {  
-               "label":"Select layers and fields",
-               "fieldName":"searchLayers",
-               "type":"multilayerandfieldselector",
-               "tooltip":"Select layer and fields to search",
-               "layerOptions":{  
-                  "supportedTypes":[  
-                     "FeatureLayer"
-                  ],
-                  "geometryTypes":[  
-                     "esriGeometryPoint",
-                     "esriGeometryLine",
-                     "esriGeometryPolyline",
-                     "esriGeometryPolygon"
-                  ]
-               },
-               "fieldOptions":{  
-                  "supportedTypes":[  
-                     "esriFieldTypeString"
-                  ]
-               }
+               "type":"search",
+               "fieldName": "searchConfig",
+               "label": "Configure search tool"
             }
          ]
       },
@@ -167,8 +140,6 @@
       "locate":false,
       "locatetrack": false,
       "search":true,
-      "searchExtent":false,
-      "locationSearch": true,
       "basemap": false,
       "alt_basemap": "satellite"
    }

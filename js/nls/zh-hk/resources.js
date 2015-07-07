@@ -1,4 +1,4 @@
-/*global define */
+﻿/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,46 +14,17 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define({
-  root: ({
+define(
+   ({
     map: {
-      noEditLayers: "This web map does not contain any editable layers.",
-      error: "Unable to create map"
+      noEditLayers: "此 Web 地圖不包含任何可編輯圖層。",
+      error: "無法建立地圖"
     },
     tools: {
     "popup": {
-            "title": "Info",
-            "instructions": "Select a feature on the map to view details."
+            "title": "資訊",
+            "instructions": "在地圖上選擇圖徵以查看詳細資訊。"
         } 
     }
-  }),
-"ar": 1,
-"cs": 1,
-"da": 1,
-"de": 1,
-"el": 1,
-"es": 1,
-"et": 1,
-"fi": 1,
-"fr": 1,
-"he": 1,
-"it": 1,
-"ja": 1,
-"ko": 1,
-"lt": 1,
-"lv": 1,
-"nl": 1,
-"nb": 1,
-"pl": 1,
-"pt-br": 1,
-"pt-pt": 1,
-"ro": 1,
-"ru": 1,
-"sv": 1,
-"tr": 1,
-"th": 1,
-"vi": 1,
-"zh-cn": 1,
-"zh-hk": 1,
-"zh-tw": 1
-});
+  })
+);

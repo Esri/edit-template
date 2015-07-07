@@ -26,8 +26,8 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
             this.set("mapResizeStepTimeout", defaults.mapResizeStepTimeout);
             // classes
             this.css = {
-                toggleButton: 'toggle-grey',
-                toggleButtonSelected: 'toggle-grey-on',
+                toggleButton: "toggle-grey",
+                toggleButtonSelected: "toggle-grey-on",
                 drawerOpen: "drawer-open",
                 drawerOpenComplete: "drawer-open-complete"
             };
@@ -47,7 +47,7 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
                 this._borderContainer.layout();
             }
             // drawer status resize
-            this.emit('resize', {});
+            this.emit("resize", {});
         },
         /* ---------------- */
         /* Public Events */
@@ -71,7 +71,7 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
             // whether drawer is now opened or closed
             var nowOpen;
             // if add is set
-            if (typeof add !== 'undefined') {
+            if (typeof add !== "undefined") {
                 nowOpen = domClass.toggle(document.body, this.css.drawerOpen, add);
             } else {
                 nowOpen = domClass.toggle(document.body, this.css.drawerOpen, !currentlyOpen);
@@ -157,8 +157,8 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
                 }, this._contentPaneCenterNode);
                 this._borderContainer.addChild(this._contentPaneCenter);
                 // leading panel
-                this._contentPaneSide = new BorderContainer({
-                    region: 'leading',
+                this._contentPaneSide = new ContentPane({
+                    region: "leading",
                     style: {
                         padding: 0
                     }
@@ -166,10 +166,9 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
 
                 this._borderContainer.addChild(this._contentPaneSide);
 
+
                 var editor = new ContentPane({
                     id: "editorStack",
-                    region:"center",
-                    style:"height:100%",
                     className: "fc",
                     title: "Editor",
                     content: "<div id='editorDiv'></div>"
@@ -177,23 +176,22 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
                 this._contentPaneSide.addChild(editor);
 
 
-
                 // start border container
                 this._borderContainer.startup();
                 // drawer button
-                var toggleClick = on(this._toggleNode, 'click', lang.hitch(this, function () {
+                var toggleClick = on(this._toggleNode, "click", lang.hitch(this, function () {
                     this.toggle();
                 }));
                 this._events.push(toggleClick);
                 // window
                 var w = win.get(document);
                 // window size event
-                var winResize = on(w, 'resize', lang.hitch(this, function () {
+                var winResize = on(w, "resize", lang.hitch(this, function () {
                     this._windowResized();
                 }));
                 this._events.push(winResize);
                 // window focused on
-                var winFocus = on(w, 'focus', lang.hitch(this, function () {
+                var winFocus = on(w, "focus", lang.hitch(this, function () {
                     setTimeout(lang.hitch(this, function () {
                         this.resize();
                     }), 250);
@@ -208,7 +206,7 @@ Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderCont
                 // emit loaded event
                 this.emit("load", {});
             } else {
-                console.log('Drawer::Missing required node');
+                console.log("Drawer::Missing required node");
             }
         },
         _windowResized: function () {

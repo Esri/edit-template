@@ -15,11 +15,13 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/Color", "dojo/_base/array", "dojo/on", "dijit/registry", "esri/arcgis/utils", "esri/lang", "dojo/dom", "dojo/dom-attr","dojo/dom-style", "dojo/query", "dojo/dom-construct", "dojo/dom-class", "application/Drawer", "esri/layers/FeatureLayer", "esri/dijit/editing/Editor", "esri/dijit/AttributeInspector", "esri/dijit/editing/TemplatePicker", "esri/tasks/query", "esri/domUtils", "dojo/domReady!"], function (
-declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domAttr, domStyle, query, domConstruct, domClass, Drawer, FeatureLayer, Editor, AttributeInspector, TemplatePicker, esriQuery, domUtils) {
+define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/Color", "dojo/_base/array", "dojo/on", "dijit/registry", "esri/arcgis/utils", "esri/lang", "dojo/dom", "dojo/dom-attr", "dojo/dom-style", "dojo/query", "dojo/dom-construct", "dojo/dom-class", "application/Drawer", "esri/layers/FeatureLayer", "esri/dijit/editing/Editor", "esri/dijit/AttributeInspector", "esri/dijit/editing/TemplatePicker", "esri/tasks/query", "esri/domUtils", "application/SearchSources", "dojo/domReady!"], function (
+declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domAttr, domStyle, query, domConstruct, domClass, Drawer, FeatureLayer, Editor, AttributeInspector, TemplatePicker, esriQuery, domUtils, SearchSources) {
     return declare(null, {
         config: {},
         editor: null,
+        editable: false,
+        editableLayers: [],
         timeFormats: ["shortDateShortTime", "shortDateLEShortTime", "shortDateShortTime24", "shortDateLEShortTime24", "shortDateLongTime", "shortDateLELongTime", "shortDateLongTime24", "shortDateLELongTime24"],
         startup: function (config) {
             // config will contain application and user defined info for the template such as i18n strings, the web map id
@@ -45,7 +47,7 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
                     config: this.config,
                     direction: this.config.i18n.direction // i18n direction "ltr" or "rtl"
                 });
-    
+
                 // startup drawer
                 this._drawer.startup();
 
@@ -104,7 +106,7 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
             if (this.config.locate) {
                 require(["esri/dijit/LocateButton"], lang.hitch(this, function (LocateButton) {
                     if (!LocateButton) {
-                      return;
+                        return;
                     }
                     //add the location button as a child of the map div. 
                     var locateDiv = domConstruct.create("div", {
@@ -138,10 +140,10 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
                             }
                         }
                     }
-                    on.once(this.map, 'basemap-change', lang.hitch(this, function () {
+                    on.once(this.map, "basemap-change", lang.hitch(this, function () {
                         if (bmLayers && bmLayers.length) {
-                            for (var i = 0; i < bmLayers.length; i++) {
-                                bmLayers[i].setVisibility(false);
+                            for (var j = 0; j < bmLayers.length; j++) {
+                                bmLayers[j].setVisibility(false);
                             }
                         }
                     })); /*End Remove*/
@@ -184,137 +186,48 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
                     if (!Search && !Locator) {
                         return;
                     }
-                    var options = {
+
+                    var searchOptions = {
                         map: this.map,
-                        enableButtonMode: true,
-                        expanded: false,
-                        addLayersFromMap: false
+                        useMapExtent: this.config.searchExtent,
+                        itemData: this.config.response.itemInfo.itemData
                     };
-                var searchLayers = false;
-                var search = new Search(options, domConstruct.create("div", {
-                    id: "search"
-                }, "mapDiv"));
-                var defaultSources = [];
 
-                //setup geocoders defined in common config 
-                if (this.config.helperServices.geocode && this.config.locationSearch) {
-                    var geocoders = lang.clone(this.config.helperServices.geocode);
-                    array.forEach(geocoders, lang.hitch(this, function (geocoder) {
-                        if (geocoder.url.indexOf(".arcgis.com/arcgis/rest/services/World/GeocodeServer") > -1) {
-
-                            geocoder.hasEsri = true;
-                            geocoder.locator = new Locator(geocoder.url);
-
-                            geocoder.singleLineFieldName = "SingleLine";
-
-                            geocoder.name = geocoder.name || "Esri World Geocoder";
-
-                            if (this.config.searchExtent) {
-                                geocoder.searchExtent = this.map.extent;
-                                geocoder.localSearchOptions = {
-                                    minScale: 300000,
-                                    distance: 50000
-                                };
-                            }
-                            defaultSources.push(geocoder);
-                        } else if (esriLang.isDefined(geocoder.singleLineFieldName)) {
-
-                            //Add geocoders with a singleLineFieldName defined 
-                            geocoder.locator = new Locator(geocoder.url);
-
-                            defaultSources.push(geocoder);
-                        }
-                    }));
-                }
-                //add configured search layers to the search widget 
-                var configuredSearchLayers = (this.config.searchLayers instanceof Array) ? this.config.searchLayers : JSON.parse(this.config.searchLayers);
-
-                array.forEach(configuredSearchLayers, lang.hitch(this, function (layer) {
-
-                    var mapLayer = this.map.getLayer(layer.id);
-                    if (mapLayer) {
-                        var source = {};
-                        source.featureLayer = mapLayer;
-
-                        if (layer.fields && layer.fields.length && layer.fields.length > 0) {
-                            source.searchFields = layer.fields;
-                            source.displayField = layer.fields[0];
-                            source.outFields = ["*"];
-                            searchLayers = true;
-                            defaultSources.push(source);
-                            if (mapLayer.infoTemplate) {
-                                source.infoTemplate = mapLayer.infoTemplate;
-                            }
-                        }
+                    if (this.config.searchConfig) {
+                        searchOptions.applicationConfiguredSources = this.config.searchConfig.sources || [];
+                    } else if (this.config.searchLayers) {
+                        var configuredSearchLayers = (this.config.searchLayers instanceof Array) ? this.config.searchLayers : JSON.parse(this.config.searchLayers);
+                        searchOptions.configuredSearchLayers = configuredSearchLayers;
+                        searchOptions.geocoders = this.config.locationSearch ? this.config.helperServices.geocode : [];
                     }
-                }));
-                
-                //Add search layers defined on the web map item 
-                if (this.config.response.itemInfo.itemData && this.config.response.itemInfo.itemData.applicationProperties && this.config.response.itemInfo.itemData.applicationProperties.viewing && this.config.response.itemInfo.itemData.applicationProperties.viewing.search) {
-                    var searchOptions = this.config.response.itemInfo.itemData.applicationProperties.viewing.search;
-                
-                    array.forEach(searchOptions.layers, lang.hitch(this, function (searchLayer) {
-                        //we do this so we can get the title specified in the item
-                        var operationalLayers = this.config.itemInfo.itemData.operationalLayers;
-                        var layer = null;
-                        array.some(operationalLayers, function (opLayer) {
-                            if (opLayer.id === searchLayer.id) {
-                                layer = opLayer;
-                                return true;
+                    var searchSources = new SearchSources(searchOptions);
+                    var createdOptions = searchSources.createOptions();
+                    if (this.config.searchConfig && this.config.searchConfig.activeSourceIndex) {
+                        createdOptions.activeSourceIndex = this.config.searchConfig.activeSourceIndex;
+                    }
+                    createdOptions.enableButtonMode = true;
+                    createdOptions.expanded = false;
+
+
+                    var search = new Search(createdOptions, domConstruct.create("div", {
+                        id: "search"
+                    }, "mapDiv"));
+
+
+                    search.on("select-result", lang.hitch(this, function () {
+                        //if edit tool is enabled we'll have to delete/create 
+                        //so info window behaves correctly. 
+                        on.once(this.map.infoWindow, "hide", lang.hitch(this, function () {
+                            search.clear();
+                            if (this.editor) {
+                                this._destroyEditor();
+                                this._createEditor();
                             }
-                        });
-
-                          if (layer && layer.hasOwnProperty("url")) {
-                            var source = {};
-                            var url = layer.url;
-                            var name = layer.title || layer.name;
-
-                            if (esriLang.isDefined(searchLayer.subLayer)) {
-                                url = url + "/" + searchLayer.subLayer;
-                                array.some(layer.layerObject.layerInfos, function (info) {
-                                    if (info.id == searchLayer.subLayer) {
-                                        name += " - " + layer.layerObject.layerInfos[searchLayer.subLayer].name;
-                                        return true;
-                                    }
-                                });
-                            }
-
-                            source.featureLayer = new FeatureLayer(url);
-
-
-                            source.name = name;
-
-
-                            source.exactMatch = searchLayer.field.exactMatch;
-                            source.displayField = searchLayer.field.name;
-                            source.searchFields = [searchLayer.field.name];
-                            source.placeholder = searchOptions.hintText;
-                            defaultSources.push(source);
-                            searchLayers = true;
-                        }
+                        }));
 
                     }));
-                }
 
-
-                search.set("sources", defaultSources);
-                search.startup();
-                
-                //set the first non esri layer as active if search layers are defined. 
-                var activeIndex = 0;
-                if (searchLayers) {
-                    array.some(defaultSources, function (s, index) {
-                        if (!s.hasEsri) {
-                            activeIndex = index;
-                            return true;
-                        }
-                    });
-
-                    if (activeIndex > 0) {
-                        search.set("activeSourceIndex", activeIndex);
-                    }
-                }
-
+                    search.startup();
 
                 }));
             }
@@ -323,13 +236,16 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
         },
         // create a map based on the input web map id
         _createWebMap: function (itemInfo) {
+            itemInfo = this._setExtent(itemInfo);
+            var mapOptions = {};
+            mapOptions = this._setLevel(mapOptions);
+            mapOptions = this._setCenter(mapOptions);
+
             arcgisUtils.createMap(itemInfo, "mapDiv", {
-                mapOptions: {
-                    // Optionally define additional map config here for example you can
-                    // turn the slider off, display info windows, disable wraparound 180, slider position and more.
-                },
+                mapOptions: mapOptions,
                 usePopupManager: true,
                 editable: this.config.editable,
+                layerMixins: this.config.layerMixins || [],
                 bingMapsKey: this.config.bingKey
             }).then(lang.hitch(this, function (response) {
                 // Once the map is created we get access to the response which provides important info
@@ -346,38 +262,17 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
 
 
                 //do we have any editable layers? 
-                var editableLayers = this._getEditableLayers(response.itemInfo.itemData.operationalLayers);
-                if (editableLayers.length > 0) {
-                    var editable = true;
+                this.editableLayers = this._getEditableLayers(response.itemInfo.itemData.operationalLayers);
+                if (this.editableLayers.length > 0) {
+                    this.editable = true;
                     if (esriLang.isDefined(this.config.userPrivileges)) {
                         if (array.indexOf(this.config.userPrivileges, "features:user:edit") === -1) {
-                            editable = false;
+                            this.editable = false;
                         }
                     }
 
-                    if (editable) {
-                        //add class we have a toolbar 
-                        if (this.config.edittoolbar) {
-                            domClass.add(document.body, "edit-toolbar");
-                        }
-
-
-                        var settings = {
-                            map: this.map,
-                            layerInfos: editableLayers,
-                            toolbarVisible: this.config.edittoolbar
-                        };
-                        this.editor = new Editor({
-                            settings: settings
-                        }, dom.byId("editorDiv"));
-
-
-                        this.editor.startup();
-                        console.log(this.editor);
-                        this._drawer.resize();
-
-                    }
-                }else{
+                    this._createEditor();
+                } else {
                     //add note that map doesn't contain editable layers 
                     registry.byId("cp_left").set("content", "<div style='padding:5px;'>" + this.config.i18n.map.noEditLayers + "</div>");
                 }
@@ -390,7 +285,35 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
                 // If you need map to be loaded, listen for it's load event.
             }), this.reportError);
         },
+        _createEditor: function () {
+            if (this.editable) {
+                //add class we have a toolbar 
+                if (this.config.edittoolbar) {
+                    domClass.add(document.body, "edit-toolbar");
+                }
 
+
+                var settings = {
+                    map: this.map,
+                    layerInfos: this.editableLayers,
+                    toolbarVisible: this.config.edittoolbar
+                };
+                this.editor = new Editor({
+                    settings: settings
+                }, domConstruct.create("div"));
+                domConstruct.place(this.editor.domNode, dom.byId("editorDiv"));
+
+                this.editor.startup();
+
+                this._drawer.resize();
+            }
+        },
+        _destroyEditor: function () {
+            if (this.editor) {
+                this.editor.destroy();
+                this.editor = null;
+            }
+        },
         _getEditableLayers: function (layers) {
             var editableLayers = [];
             array.forEach(layers, lang.hitch(this, function (layer) {
@@ -500,5 +423,41 @@ declare, has, lang, Color, array, on, registry, arcgisUtils, esriLang, dom, domA
             }
             return current;
         },
+
+        _setLevel: function (options) {
+            var level = this.config.level;
+            //specify center and zoom if provided as url params 
+            if (level) {
+                options.zoom = level;
+            }
+            return options;
+        },
+
+        _setCenter: function (options) {
+            var center = this.config.center;
+            if (center) {
+                var points = center.split(",");
+                if (points && points.length === 2) {
+                    options.center = [parseFloat(points[0]), parseFloat(points[1])];
+                }
+            }
+            return options;
+        },
+
+        _setExtent: function (info) {
+            var e = this.config.extent;
+            //If a custom extent is set as a url parameter handle that before creating the map
+            if (e) {
+                var extArray = e.split(",");
+                var extLength = extArray.length;
+                if (extLength === 4) {
+                    info.item.extent = [
+                        [parseFloat(extArray[0]), parseFloat(extArray[1])],
+                        [parseFloat(extArray[2]), parseFloat(extArray[3])]
+                    ];
+                }
+            }
+            return info;
+        }
     });
 });
