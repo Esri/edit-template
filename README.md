@@ -1,22 +1,23 @@
-edit-template
-=============
+elevation-profile-template
+==========================
 
-Edit is a configurable application template that enables you to provide basic editing capabilites for editable layers in a web map.
+Elevation Profile is a configurable application template used to display the elevation profile for a selected feature or a measured line along with a web map.
 
-![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/edit_th.jpg)
+![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/elevation_profile_th.jpg)
 
-[View it live](http://www.arcgis.com/apps/Editor/index.html?webmap=25977874c66c4c0a8dcc181506c6fb45)
-
+[View it live](http://www.arcgis.com/apps/Elevations/index.html?webmap=8dd583ea3de64e40b92ea5a261d0c6c8)
 
 #Features
-**Edit** is a configurable application template that enables you to provide basic editing capabilites for editable layers in a web map. The template can be configured using the following options:
+Elevation Profile is a configurable application template used to display the elevation profile for a selected feature or a measured line along with a web map. This template uses the [Profile geoprocessing service](http://www.arcgis.com/home/item.html?id=3300cfc33ca74a9fac69d2e0f4ea46e5) to generate the elevation values along the profile. View the [Profile service developer documentation](https://developers.arcgis.com/en/rest/elevation/api-reference/profilesync.htm) for additional details.
 
-- **Map:**Choose the web map used in your application.
-- **Color Scheme:** Choose the application color scheme by defining custom colors.
-- **Search:** Enable the geocoder widget and optionally specify one or more search layers and fields. 
-- **Locate:** Enable a 'Locate Me' button. Optionally specify that tracking will be enabled which tracks the users current location. 
-- **Basemap Toggle:** Add the Basemap Toggle widget to the application. This widget allows you to toggle between your map's basemap and an alternate basemap. 
-- **Show Toolbar:**Display an editing toolbar.
+This template can be configured using the following options:
+
+- **Map:** Choose the web map(s) used in the application. 
+- **Bing Maps Key:** Enter a Bing Maps key to enable the application to use Bing Maps. 
+- **Scalebar Units:** Specify the scale bar units; choose Metric and English, Metric only, or English only. 
+- **Search:** Enable search (geocode) capability to the app. Optionally configure the search to search feature layers within the map. 
+- **Help Dialog**: By default the help dialog for this app displays on app load. Set to false to prevent the dialog from displaying on load. 
+- **Display Poups**: Set to false to hide popups. 
 
 
 ## Instructions
@@ -40,6 +41,8 @@ Edit is a configurable application template that enables you to provide basic ed
 5. Copy a map or group ID from Portal/ArcGIS Online and replace the default web map ID in the application’s default.js file. You can now run the application on your web server or customize the application further.
 
 > **Note:** If your application edits features in a feature service, contains secure services or web maps that aren't shared publicly, or generate requests that exceed 200 characters, you may need to set up and use a proxy page. Common situations where you may exceed the URL length are using complex polygons as input to a task or specifying a spatial reference using well-known text (WKT). For details on installing and configuring a proxy page see [Using the proxy](https://developers.arcgis.com/javascript/jshelp/ags_proxy.html). If you do not have an Internet connection, you will need to access and deploy the ArcGIS API for JavaScript documentation from [developers.arcgis.com](https://developers.arcgis.com/).
+
+
 #Requirements
 
 - Notepad or HTML editor
@@ -50,8 +53,7 @@ Edit is a configurable application template that enables you to provide basic ed
 
 - [ArcGIS API for JavaScript Resource Center](http://help.arcgis.com/en/webapi/javascript/arcgis/index.html)
 - [ArcGIS Online] (http://www.arcgis.com)
-- Want to create your own template? View the [Application Boilerplate](https://github.com/Esri/application-boilerplate-js) to get started. 
-- [View the Edit template on ArcGIS Online](http://www.arcgis.com/home/item.html?id=2a9fbd75eea14c87a32d3799e00663f2)
+
 #Issues
 Found a bug or want to request a new feature? Please let us know by submitting an issue. 
 
@@ -69,5 +71,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 A copy of the license is available in the repository's license.txt file.
+
+
 [](Esri Tags: ArcGIS Online Web Application Templates) 
 [](Esri Language: JavaScript)
