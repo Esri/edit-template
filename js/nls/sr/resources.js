@@ -16,13 +16,13 @@
  */
 define({
   "map": {
-    "noEditLayers": "Questa mappa Web non contiene layer modificabili.",
-    "error": "Impossibile creare la mappa"
+    "noEditLayers": "Ova veb mapa ne sadrži slojeve koji mogu da se uređuju.",
+    "error": "Kreiranje mape nije moguće"
   },
   "tools": {
     "popup": {
-      "title": "Informazioni",
-      "instructions": "Selezionare una feature sulla mappa per visualizzare i dettagli."
+      "title": "Informacije",
+      "instructions": "Izaberite geoobjekat na mapi da vidite detalje."
     }
   }
 });

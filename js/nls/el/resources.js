@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Αυτός ο web χάρτης δεν περιέχει επεξεργάσιμα επίπεδα.",
-      error: "Δεν είναι δυνατή η δημιουργία χάρτη"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Αυτός ο web χάρτης δεν περιέχει επεξεργάσιμα επίπεδα.",
+    "error": "Δεν είναι δυνατή η δημιουργία χάρτη"
+  },
+  "tools": {
     "popup": {
-            "title": "Πληροφορίες",
-            "instructions": "Επιλέξτε ένα στοιχείο στο χάρτη για να δείτε λεπτομέρειες."
-        } 
+      "title": "Πληροφορίες",
+      "instructions": "Επιλέξτε ένα στοιχείο στο χάρτη για να δείτε λεπτομέρειες."
     }
-  })
-);
+  }
+});

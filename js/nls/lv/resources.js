@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Web kartē nav ietverts neviens rediģējams slānis.",
-      error: "Nevar izveidot karti"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Web kartē nav ietverts neviens rediģējams slānis.",
+    "error": "Nevar izveidot karti"
+  },
+  "tools": {
     "popup": {
-            "title": "Informācija",
-            "instructions": "Izvēlieties elementu kartē, lai skatītu detaļas."
-        } 
+      "title": "Informācija",
+      "instructions": "Izvēlieties elementu kartē, lai skatītu detaļas."
     }
-  })
-);
+  }
+});

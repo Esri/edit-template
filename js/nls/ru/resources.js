@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Эта веб-карта не содержит редактируемых слоев.",
-      error: "Не удалось создать карту"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Эта веб-карта не содержит редактируемых слоев.",
+    "error": "Не удалось создать карту"
+  },
+  "tools": {
     "popup": {
-            "title": "Информация",
-            "instructions": "Выберите объект на карте, чтобы просмотреть детали."
-        } 
+      "title": "Информация",
+      "instructions": "Выберите объект на карте, чтобы просмотреть детали."
     }
-  })
-);
+  }
+});

@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "此 Web 地图不包含任何可编辑图层。",
-      error: "无法创建地图"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "此 Web 地图不包含任何可编辑图层。",
+    "error": "无法创建地图"
+  },
+  "tools": {
     "popup": {
-            "title": "信息",
-            "instructions": "在地图上选择要素以查看详细信息。"
-        } 
+      "title": "信息",
+      "instructions": "在地图上选择要素以查看详细信息。"
     }
-  })
-);
+  }
+});

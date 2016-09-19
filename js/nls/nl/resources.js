@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Webmap bevat geen bewerkbare lagen.",
-      error: "Kan geen kaart creëren"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Webmap bevat geen bewerkbare lagen.",
+    "error": "Kan geen kaart creëren"
+  },
+  "tools": {
     "popup": {
-            "title": "Info",
-            "instructions": "Selecteer een object op de kaart om de details te bekijken."
-        } 
+      "title": "Info",
+      "instructions": "Selecteer een object op de kaart om de details te bekijken."
     }
-  })
-);
+  }
+});

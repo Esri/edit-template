@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Această hartă web nu conţine straturi tematice care pot fi editate.",
-      error: "Nu se poate crea harta"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Această hartă web nu conţine straturi tematice care pot fi editate.",
+    "error": "Nu se poate crea harta"
+  },
+  "tools": {
     "popup": {
-            "title": "Informaţii",
-            "instructions": "Selectaţi un obiect spaţial de pe hartă pentru a vizualiza detaliile."
-        } 
+      "title": "Informaţii",
+      "instructions": "Selectaţi un obiect spaţial de pe hartă pentru a vizualiza detaliile."
     }
-  })
-);
+  }
+});

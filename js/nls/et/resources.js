@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Veebikaart ei sisalda ühtegi muudetavat kihti.",
-      error: "Kaarti ei saa luua"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Veebikaart ei sisalda ühtegi muudetavat kihti.",
+    "error": "Kaarti ei saa luua"
+  },
+  "tools": {
     "popup": {
-            "title": "Teave",
-            "instructions": "Valige detailide kuvamiseks kaardil objekt."
-        } 
+      "title": "Teave",
+      "instructions": "Valige detailide kuvamiseks kaardil objekt."
     }
-  })
-);
+  }
+});

@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Bản đồ web này không chứa lớp nào có thể chỉnh sửa.",
-      error: "Không thể tạo bản đồ"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Bản đồ web này không chứa lớp nào có thể chỉnh sửa.",
+    "error": "Không thể tạo bản đồ"
+  },
+  "tools": {
     "popup": {
-            "title": "Thông tin",
-            "instructions": "Chọn một đối tượng trên bản đồ để xem thông tin chi tiết."
-        } 
+      "title": "Thông tin",
+      "instructions": "Chọn một đối tượng trên bản đồ để xem thông tin chi tiết."
     }
-  })
-);
+  }
+});

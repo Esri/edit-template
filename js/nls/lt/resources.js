@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Šiame internetiniame žemėlapyje nėra redaguojamų sluoksnių.",
-      error: "Žemėlapio sukurti nepavyko"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Šiame internetiniame žemėlapyje nėra redaguojamų sluoksnių.",
+    "error": "Žemėlapio sukurti nepavyko"
+  },
+  "tools": {
     "popup": {
-            "title": "Informacija",
-            "instructions": "Informacijos peržiūrai žemėlapyje pasirinkite elementą."
-        } 
+      "title": "Informacija",
+      "instructions": "Informacijos peržiūrai žemėlapyje pasirinkite elementą."
     }
-  })
-);
+  }
+});

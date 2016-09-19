@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Tato webová mapa neobsahuje žádné editovatelné vrstvy.",
-      error: "Nelze vytvořit mapu"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Tato webová mapa neobsahuje žádné editovatelné vrstvy.",
+    "error": "Nelze vytvořit mapu"
+  },
+  "tools": {
     "popup": {
-            "title": "Informace",
-            "instructions": "Vyberte prvek na mapě, jehož podrobnosti chcete zobrazit."
-        } 
+      "title": "Informace",
+      "instructions": "Vyberte prvek na mapě, jehož podrobnosti chcete zobrazit."
     }
-  })
-);
+  }
+});

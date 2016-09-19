@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "この Web マップには、編集可能なレイヤが含まれていません。",
-      error: "マップを作成できません"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "この Web マップには、編集可能なレイヤが含まれていません。",
+    "error": "マップを作成できません"
+  },
+  "tools": {
     "popup": {
-            "title": "情報",
-            "instructions": "マップ上のフィーチャを選択して詳細を表示します。"
-        } 
+      "title": "情報",
+      "instructions": "マップ上のフィーチャを選択して詳細を表示します。"
     }
-  })
-);
+  }
+});

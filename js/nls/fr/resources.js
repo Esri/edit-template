@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Cette carte Web ne contient pas de couches modifiables.",
-      error: "Impossible de créer la carte"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Cette carte Web ne contient pas de couches modifiables.",
+    "error": "Impossible de créer la carte"
+  },
+  "tools": {
     "popup": {
-            "title": "Informations",
-            "instructions": "Sélectionnez une entité sur la carte pour afficher ses détails."
-        } 
+      "title": "Informations",
+      "instructions": "Sélectionnez une entité sur la carte pour afficher ses détails."
     }
-  })
-);
+  }
+});

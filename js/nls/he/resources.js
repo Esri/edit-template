@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "מפת אינטרנט זו אינה מכילה שכבות שניתן לערוך.",
-      error: "לא ניתן ליצור מפה"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "wweb map זה אינו מכיל שכבות שניתן לערוך.",
+    "error": "לא ניתן ליצור מפה"
+  },
+  "tools": {
     "popup": {
-            "title": "מידע",
-            "instructions": "בחר ישות במפה להצגת פרטים."
-        } 
+      "title": "מידע",
+      "instructions": "בחר ישות במפה להצגת פרטים."
     }
-  })
-);
+  }
+});

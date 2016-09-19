@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "เว็บแมพไม่มีชั้นข้อมูลใดที่สามารถแก้ไขได้",
-      error: "ไม่สามารถสร้างแผนที่ได้"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "เว็บแมพไม่มีชั้นข้อมูลใดที่สามารถแก้ไขได้",
+    "error": "ไม่สามารถสร้างแผนที่ได้"
+  },
+  "tools": {
     "popup": {
-            "title": "ข้อมูล",
-            "instructions": "เลือกฟีเจอร์บนแผนที่เพื่อแสดงรายละเอียด"
-        } 
+      "title": "ข้อมูล",
+      "instructions": "เลือกฟีเจอร์บนแผนที่เพื่อแสดงรายละเอียด"
     }
-  })
-);
+  }
+});

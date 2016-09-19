@@ -26,6 +26,10 @@ define({
   //Enter the url to the proxy if needed by the application. See the 'Using the proxy page' help topic for details
   //http://developers.arcgis.com/en/javascript/jshelp/ags_proxy.html
   "proxyurl": "",
+  // This is an option added so that developers working with the
+  // hosted version of the application can apply custom styles
+  // not used in the download version.
+  "customstyle": null,
   "theme": "#f7f8f8",
   "color": "#4c4c4c",
   "title": null,
@@ -35,7 +39,7 @@ define({
   "sharinghost": location.protocol + "//" + "www.arcgis.com",
   "units": null,
   //If your applcation needs to edit feature layer fields set this value to true. When false the map will
-  //be dreated with layers that are not set to editable which allows the FeatureLayer to load features optimally. 
+  //be dreated with layers that are not set to editable which allows the FeatureLayer to load features optimally.
   "editable": true,
   "edittoolbar": false,
   "basemap": false,
@@ -47,9 +51,9 @@ define({
   "locationSearch": true,
   //When searchExtent is true the locator will prioritize results within the current map extent.
   "searchExtent": false,
-  "searchLayers":[{
-      "id": "",
-      "fields": []
+  "searchLayers": [{
+    "id": "",
+    "fields": []
   }],
   "scale": true,
   "helperServices": {
@@ -64,6 +68,6 @@ define({
     },
     "geocode": [{
       "url": null
-        }]
+    }]
   }
 });

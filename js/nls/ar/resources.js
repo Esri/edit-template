@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "خريطة الويب لا تحتوي على أي طبقات قابلة للتحرير.",
-      error: "يتعذر إنشاء الخريطة"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "خريطة الويب لا تحتوي على أي طبقات قابلة للتحرير.",
+    "error": "يتعذر إنشاء الخريطة"
+  },
+  "tools": {
     "popup": {
-            "title": "معلومات",
-            "instructions": "حدد معلمًا على خريطة لعرض التفاصيل."
-        } 
+      "title": "معلومات",
+      "instructions": "حدد معلمًا على خريطة لعرض التفاصيل."
     }
-  })
-);
+  }
+});

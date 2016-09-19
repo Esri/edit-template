@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Tämä Web-kartta ei sisällä muokattavia karttatasoja.",
-      error: "Karttaa ei voi luoda"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Tämä Web-kartta ei sisällä muokattavia karttatasoja.",
+    "error": "Karttaa ei voi luoda"
+  },
+  "tools": {
     "popup": {
-            "title": "Tiedot",
-            "instructions": "Voit katsella tietoja valitsemalla kohteen kartalta."
-        } 
+      "title": "Tiedot",
+      "instructions": "Voit katsella tietoja valitsemalla kohteen kartalta."
     }
-  })
-);
+  }
+});

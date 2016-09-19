@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Este mapa web no contiene ninguna capa editable.",
-      error: "No se puede crear el mapa"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Este mapa web no contiene ninguna capa editable.",
+    "error": "No se puede crear el mapa"
+  },
+  "tools": {
     "popup": {
-            "title": "Información",
-            "instructions": "Selecciona una entidad en el mapa para ver los detalles."
-        } 
+      "title": "Información",
+      "instructions": "Selecciona una entidad en el mapa para ver los detalles."
     }
-  })
-);
+  }
+});

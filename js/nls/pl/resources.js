@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Mapa internetowa nie zawiera warstw edytowalnych.",
-      error: "Nie można utworzyć mapy"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Mapa internetowa nie zawiera warstw edytowalnych.",
+    "error": "Nie można utworzyć mapy"
+  },
+  "tools": {
     "popup": {
-            "title": "Informacje",
-            "instructions": "Wybierz obiekt na mapie, aby wyświetlić szczegóły."
-        } 
+      "title": "Informacje",
+      "instructions": "Wybierz obiekt na mapie, aby wyświetlić szczegóły."
     }
-  })
-);
+  }
+});

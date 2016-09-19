@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,17 +14,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-   ({
-    map: {
-      noEditLayers: "Webkortet indeholder ikke nogen redigérbare lag.",
-      error: "Kan ikke oprette kort"
-    },
-    tools: {
+define({
+  "map": {
+    "noEditLayers": "Webkortet indeholder ikke nogen redigérbare lag.",
+    "error": "Kan ikke oprette kort"
+  },
+  "tools": {
     "popup": {
-            "title": "Oplysninger",
-            "instructions": "Vælg et objekt på kortet for at få vist oplysninger."
-        } 
+      "title": "Oplysninger",
+      "instructions": "Vælg et objekt på kortet for at få vist oplysninger."
     }
-  })
-);
+  }
+});
