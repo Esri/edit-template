@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Tämä Web-kartta ei sisällä muokattavia karttatasoja.",
+    "noEditPrivileges": "Tilillä ei ole muokkausoikeuksia. Ota yhtyettä järjestelmänvalvojaan.",
     "error": "Karttaa ei voi luoda"
   },
   "tools": {
+    "edit": "Muokkaa",
     "popup": {
       "title": "Tiedot",
       "instructions": "Voit katsella tietoja valitsemalla kohteen kartalta."

@@ -17,11 +17,13 @@
 define({
   "map": {
     "noEditLayers": "Este mapa da web não contém quaisquer camadas editáveis.",
+    "noEditPrivileges": "Sua conta não tem privilégios de edição, entre em contato com seu administrador para ajuda adicional.",
     "error": "Não foi possível criar o mapa"
   },
   "tools": {
+    "edit": "Editar",
     "popup": {
-      "title": "Info",
+      "title": "Informação",
       "instructions": "Selecione uma feição no mapa para visualizar detalhes."
     }
   }

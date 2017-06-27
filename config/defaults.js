@@ -30,8 +30,13 @@ define({
   // hosted version of the application can apply custom styles
   // not used in the download version.
   "customstyle": null,
+  "customLayout": "default", // titlepanel or default
   "theme": "#f7f8f8",
   "color": "#4c4c4c",
+  "bodyBg": "#fff",
+  "bodyColor": "#666",
+  "buttonColor": "#2f4f4f",
+  "buttonBg": "#949494",
   "title": null,
   "drawerSize": null,
   "bingKey": "", //Enter the url to your organizations bing maps key if you want to use bing basemaps

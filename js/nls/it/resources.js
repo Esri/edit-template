@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Questa mappa Web non contiene layer modificabili.",
+    "noEditPrivileges": "L'account non dispone di privilegi di modifica. Per assistenza contattare l'amministratore del sistema.",
     "error": "Impossibile creare la mappa"
   },
   "tools": {
+    "edit": "Modifica",
     "popup": {
       "title": "Informazioni",
       "instructions": "Selezionare una feature sulla mappa per visualizzare i dettagli."

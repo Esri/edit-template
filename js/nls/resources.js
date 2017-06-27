@@ -18,25 +18,31 @@ define({
   root: ({
     map: {
       noEditLayers: "This web map does not contain any editable layers.",
+      noEditPrivileges: "Your account doesn't have editing privilege, contact your administrator for further assistance.",
       error: "Unable to create map"
     },
     tools: {
-    "popup": {
-            "title": "Info",
-            "instructions": "Select a feature on the map to view details."
-        } 
+      "edit": "Edit",
+      "popup": {
+        "title": "Info",
+        "instructions": "Select a feature on the map to view details."
+      }
     }
   }),
   "ar": 1,
+  "bs": 1,
   "cs": 1,
   "da": 1,
   "de": 1,
   "es": 1,
+  "el": 1,
   "et": 1,
   "fi": 1,
   "fr": 1,
   "he": 1,
-  "hr": 1, 
+  "hi": 1,
+  "hr": 1,
+  "id": 1,
   "it": 1,
   "ja": 1,
   "ko": 1,

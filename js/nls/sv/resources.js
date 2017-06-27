@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Den här webbkartan innehåller inga redigerbara lager.",
+    "noEditPrivileges": "Ditt konto har inte redigeringsbehörighet. Kontakta administratören om du behöver ytterligare hjälp.",
     "error": "Det gick inte att skapa kartan"
   },
   "tools": {
+    "edit": "Redigera",
     "popup": {
       "title": "Info",
       "instructions": "Välj ett geoobjekt på kartan för att visa information."

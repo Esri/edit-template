@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Bản đồ web này không chứa lớp nào có thể chỉnh sửa.",
+    "noEditPrivileges": "Tài khoản của bạn không có quyền chỉnh sửa, vui lòng liên hệ với người quản trị để được hỗ trợ thêm.",
     "error": "Không thể tạo bản đồ"
   },
   "tools": {
+    "edit": "Chỉnh sửa",
     "popup": {
       "title": "Thông tin",
       "instructions": "Chọn một đối tượng trên bản đồ để xem thông tin chi tiết."

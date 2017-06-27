@@ -15,15 +15,15 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel", "dojo/_base/Color", "dojo/_base/array", "dojo/on", "dijit/registry", "esri/arcgis/utils", "esri/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-style", "dojo/query", "dojo/dom-construct", "dojo/dom-class", "application/Drawer", "esri/layers/FeatureLayer", "esri/dijit/editing/Editor", "esri/dijit/AttributeInspector", "esri/dijit/editing/TemplatePicker", "esri/tasks/query", "esri/domUtils", "application/SearchSources", "dojo/domReady!"], function(
-  declare, has, lang, kernel, Color, array, on, registry, arcgisUtils, esriLang, dom, domGeometry, domAttr, domStyle, query, domConstruct, domClass, Drawer, FeatureLayer, Editor, AttributeInspector, TemplatePicker, esriQuery, domUtils, SearchSources) {
+define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel", "dojo/_base/Color", "dojo/_base/array", "dojo/on", "dijit/registry", "esri/arcgis/utils", "esri/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-style", "dojo/query", "dojo/dom-construct", "dojo/dom-class", "application/Drawer", "esri/layers/FeatureLayer", "esri/dijit/editing/Editor", "esri/dijit/AttributeInspector", "esri/tasks/query", "esri/domUtils", "application/SearchSources", "dojo/domReady!"], function (
+  declare, has, lang, kernel, Color, array, on, registry, arcgisUtils, esriLang, dom, domGeometry, domAttr, domStyle, query, domConstruct, domClass, Drawer, FeatureLayer, Editor, AttributeInspector, esriQuery, domUtils, SearchSources) {
   return declare(null, {
     config: {},
     editor: null,
     editable: false,
     editableLayers: [],
     timeFormats: ["shortDateShortTime", "shortDateLEShortTime", "shortDateShortTime24", "shortDateLEShortTime24", "shortDateLongTime", "shortDateLELongTime", "shortDateLongTime24", "shortDateLELongTime24"],
-    startup: function(config) {
+    startup: function (config) {
       document.documentElement.lang = kernel.locale;
       // config will contain application and user defined info for the template such as i18n strings, the web map id
       // and application id
@@ -35,6 +35,13 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
           this.config.color = sharedTheme.theme.text.color;
           this.config.theme = sharedTheme.theme.body.bg;
         }
+        // Apply custom layout css
+        var customTheme = document.createElement("link");
+        customTheme.setAttribute("rel", "stylesheet");
+        customTheme.setAttribute("type", "text/css");
+        customTheme.setAttribute("href", "css/theme/" + this.config.customLayout + ".css");
+        document.head.appendChild(customTheme);
+
 
         // Create and add custom style sheet
         if (this.config.customstyle) {
@@ -73,7 +80,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
         this.reportError(error);
       }
     },
-    reportError: function(error) {
+    reportError: function (error) {
       // remove loading class from body
       domClass.remove(document.body, "app-loading");
       domClass.add(document.body, "app-error");
@@ -92,9 +99,9 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
       }
 
     },
-    _addMapWidgets: function() {
+    _addMapWidgets: function () {
       if (this.config.scale) {
-        require(["esri/dijit/Scalebar"], lang.hitch(this, function(Scalebar) {
+        require(["esri/dijit/Scalebar"], lang.hitch(this, function (Scalebar) {
           var scalebar = new Scalebar({
             map: this.map,
             scalebarUnit: this.config.units
@@ -102,7 +109,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
         }));
       }
       if (this.config.home) {
-        require(["esri/dijit/HomeButton"], lang.hitch(this, function(HomeButton) {
+        require(["esri/dijit/HomeButton"], lang.hitch(this, function (HomeButton) {
           if (!HomeButton) {
             return;
           }
@@ -116,7 +123,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
 
       //add the location button if enabled.
       if (this.config.locate) {
-        require(["esri/dijit/LocateButton"], lang.hitch(this, function(LocateButton) {
+        require(["esri/dijit/LocateButton"], lang.hitch(this, function (LocateButton) {
           if (!LocateButton) {
             return;
           }
@@ -134,7 +141,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
 
       //add the basemap toggle if enabled.
       if (this.config.basemap) {
-        require(["esri/dijit/BasemapToggle", "esri/basemaps"], lang.hitch(this, function(BasemapToggle, basemaps) {
+        require(["esri/dijit/BasemapToggle", "esri/basemaps"], lang.hitch(this, function (BasemapToggle, basemaps) {
           if (!BasemapToggle && basemaps) {
             return;
           }
@@ -152,7 +159,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
               }
             }
           }
-          on.once(this.map, "basemap-change", lang.hitch(this, function() {
+          on.once(this.map, "basemap-change", lang.hitch(this, function () {
             if (bmLayers && bmLayers.length) {
               for (var j = 0; j < bmLayers.length; j++) {
                 bmLayers[j].setVisibility(false);
@@ -194,7 +201,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
       //Add the location search widget
       if (this.config.search) {
 
-        require(["esri/dijit/Search", "esri/tasks/locator", "esri/lang"], lang.hitch(this, function(Search, Locator, esriLang) {
+        require(["esri/dijit/Search", "esri/tasks/locator", "esri/lang"], lang.hitch(this, function (Search, Locator, esriLang) {
           if (!Search && !Locator) {
             return;
           }
@@ -226,13 +233,14 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
           }, "mapDiv"));
 
 
-          search.on("select-result", lang.hitch(this, function() {
+          search.on("select-result", lang.hitch(this, function () {
             //if edit tool is enabled we'll have to delete/create
             //so info window behaves correctly.
-            on.once(this.map.infoWindow, "hide", lang.hitch(this, function() {
+            on.once(this.map.infoWindow, "hide", lang.hitch(this, function () {
               search.clearGraphics();
               if (this.editor) {
                 this._destroyEditor();
+                this._setupEditablePopup();
                 this._createEditor();
               }
             }));
@@ -247,44 +255,68 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
 
     },
     // create a map based on the input web map id
-    _createWebMap: function(itemInfo) {
+    _createWebMap: function (itemInfo) {
       itemInfo = this._setExtent(itemInfo);
       var mapOptions = {};
       mapOptions = this._setLevel(mapOptions);
       mapOptions = this._setCenter(mapOptions);
-
-      arcgisUtils.createMap(itemInfo, "mapDiv", {
+      var options = {
         mapOptions: mapOptions,
         usePopupManager: true,
         editable: this.config.editable,
         layerMixins: this.config.layerMixins || [],
         bingMapsKey: this.config.bingKey
-      }).then(lang.hitch(this, function(response) {
+      };
+      if (this.config.orgInfo && this.config.orgInfo.user && this.config.orgInfo.user.privileges) {
+        options.privileges = this.config.orgInfo.user.privileges;
+        console.log("Privileges set", options.privileges);
+      }
+
+      arcgisUtils.createMap(itemInfo, "mapDiv", options).then(lang.hitch(this, function (response) {
         // Once the map is created we get access to the response which provides important info
         // such as the map, operational layers, popup info and more. This object will also contain
         // any custom options you defined for the template.
         this.map = response.map;
         this.config.response = response;
         domClass.add(this.map.infoWindow.domNode, "light");
-        this.map.setInfoWindowOnClick(false);
 
         on(this.map.infoWindow, "show", this._updatePopup);
         on(this.map.infoWindow, "restore", this._updatePopup);
         var title = this.config.title || this.config.response.itemInfo.item.title;
         document.title = title;
-        dom.byId("title").innerHTML = title;
+
+
+        if (this.config.customLayout === "default") {
+          domConstruct.create("h1", {
+            id: "title",
+            innerHTML: title
+          }, "topBar", "last");
+
+        } else {
+          domConstruct.create("div", {
+            className: "title-bar",
+            innerHTML: "<h1 id='title'>" + title + "</h1>"
+          }, "cp_left", "first");
+        }
+
 
         //do we have any editable layers?
         this.editableLayers = this._getEditableLayers(response.itemInfo.itemData.operationalLayers);
         if (this.editableLayers.length > 0) {
+          /* if (esriLang.isDefined(this.config.userPrivileges)) {
+             if (array.indexOf(this.config.userPrivileges, "features:user:edit") === -1) {
+               this.editable = false;
+               this.config.i18n.map.noEditLayers = this.config.i18n.map.noEditPrivileges;
+             }
+           }*/
           this.editable = true;
-          if (esriLang.isDefined(this.config.userPrivileges)) {
-            if (array.indexOf(this.config.userPrivileges, "features:user:edit") === -1) {
-              this.editable = false;
-            }
-          }
+          this._setupEditablePopup();
           this._createEditor();
+
         } else {
+          // No editable layers
+          this.config.editable = false;
+          console.log("No Editable layers", this.config.editable);
           //add note that map doesn't contain editable layers
           registry.byId("cp_left").set("content", "<div style='padding:5px;'>" + this.config.i18n.map.noEditLayers + "</div>");
           this.map.setInfoWindowOnClick(true);
@@ -293,16 +325,46 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
         domClass.remove(document.body, "app-loading");
         this._addMapWidgets();
 
-      // If you need map to be loaded, listen for it's load event.
+        // If you need map to be loaded, listen for it's load event.
       }), this.reportError);
     },
-    _updatePopup: function(e) {
+    _updatePopup: function (e) {
       var box = domGeometry.getContentBox(this.map.container);
       if (box && box.w && box.w < 600) {
         this.map.infoWindow.maximize();
       }
     },
-    _createEditor: function() {
+    _setupEditablePopup: function () {
+      var link = domConstruct.create("a", {
+        "class": "action edit",
+        "id": "editLink",
+        "innerHTML": this.config.i18n.tools.edit,
+        "href": "javascript: void(0);"
+      }, query(".actionList", this.map.infoWindow.domNode)[0]);
+      on(link, "click", lang.hitch(this, function () {
+        var selectedFeature = this.map.infoWindow.getSelectedFeature();
+
+        if (selectedFeature && selectedFeature._layer) {
+          this._destroyEditor();
+          this._createEditor();
+          this.editor.attributeInspector.showFeature(selectedFeature, selectedFeature._layer)
+          this.map.infoWindow.show();
+
+        }
+      }));
+
+      on(this.map.infoWindow, "selection-change", function () {
+        var selected = this.map.infoWindow.getSelectedFeature();
+        if (selected && selected._layer && selected._layer.isEditable()) {
+          // show editable link 
+          domStyle.set(link, "visibility", "visible");
+        } else { // hide editable link 
+          domStyle.set(link, "visibility", "hidden");
+        }
+      });
+
+    },
+    _createEditor: function () {
       if (this.editable) {
         //add class we have a toolbar
         if (this.config.edittoolbar) {
@@ -319,20 +381,36 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
         }, domConstruct.create("div"));
         domConstruct.place(this.editor.domNode, dom.byId("editorDiv"));
 
+        this.editor.on("load", lang.hitch(this, function () {
+          this.editor.templatePicker.on("selection-change", lang.hitch(this, function () {
+            var sel = this.editor.templatePicker.getSelected();
+            if (sel) {
+              console.log("Prevent Popups so we can edit");
+              this.map.setInfoWindowOnClick(false);
+            }
+          }));
+        }));
+        if (this.config.customLayout !== "default") {
+          this.editor.on("load", function () {
+            query(".esriDrawingToolbar").forEach(function (node) {
+              domConstruct.place(node, dom.byId("editorDiv"), "before");
+            });
+          });
+        }
         this.editor.startup();
 
         this._drawer.resize();
       }
     },
-    _destroyEditor: function() {
+    _destroyEditor: function () {
       if (this.editor) {
         this.editor.destroy();
         this.editor = null;
       }
     },
-    _getEditableLayers: function(layers) {
+    _getEditableLayers: function (layers) {
       var editableLayers = [];
-      array.forEach(layers, lang.hitch(this, function(layer) {
+      array.forEach(layers, lang.hitch(this, function (layer) {
         if (layer && layer.layerObject) {
           var eLayer = layer.layerObject;
           if (eLayer instanceof FeatureLayer) {
@@ -340,19 +418,24 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
               editableLayers.push({
                 "featureLayer": eLayer
               });
+            } else {
+              // setup event listener that enables popups when layer is clicked
+              eLayer.on("click", lang.hitch(this, function () {
+                this.map.setInfoWindowOnClick(true);
+              }));
             }
           }
         }
       }));
 
-      array.forEach(editableLayers, lang.hitch(this, function(hintLayer) {
+      array.forEach(editableLayers, lang.hitch(this, function (hintLayer) {
 
         if (hintLayer.featureLayer && hintLayer.featureLayer.infoTemplate && hintLayer.featureLayer.infoTemplate.info && hintLayer.featureLayer.infoTemplate.info.fieldInfos) {
           //only display visible fields
           var fields = hintLayer.featureLayer.infoTemplate.info.fieldInfos;
 
           var fieldInfos = [];
-          array.forEach(fields, lang.hitch(this, function(field) {
+          array.forEach(fields, lang.hitch(this, function (field) {
 
             //add date support
             if (field.format && field.format.dateFormat && array.indexOf(this.timeFormats, field.format.dateFormat) > -1) {
@@ -370,79 +453,76 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
 
       return editableLayers;
     },
-    _updateTheme: function() {
-      //Set the background color using the configured theme value
-      query(".bg").style("backgroundColor", this.config.theme.toString());
-      query(".esriPopup .pointer").style("backgroundColor", this.config.theme.toString());
-      query(".esriPopup .titlePane").style("backgroundColor", this.config.theme.toString());
-
-
-      //Set the font color using the configured color value
-      query(".fc").style("color", this.config.color.toString());
-      query(".esriPopup .titlePane").style("color", this.config.color.toString());
-      query(".esriPopup. .titleButton").style("color", this.config.color.toString());
-
-
-      //Set the Slider +/- color to match the icon style. Valid values are white and black
-      // White is default so we just need to update if using black.
-      //Also update the menu icon to match the tool color. Default is white.
-      if (this.config.icons === "black") {
-        query(".esriSimpleSlider").style("color", "#000");
-        query(".icon-color").style("color", "#000");
+    _updateTheme: function () {
+      var styles = {
+        theme: this.config.theme,
+        color: this.config.color,
+        buttonColor: this.config.buttonColor,
+        buttonBg: this.config.buttonBg,
+        bodyBg: this.config.bodyBg,
+        bodyColor: this.config.bodyColor
+      };
+      var themeCss = esriLang.substitute(styles, ".bg{background-color:${theme}; color:${color};} .fc{color:${color};} .bc{color:${buttonColor}; !important}; .ac-container label:after{color:${buttonColor};}} .esriPopup .pointer{backgroundColor:${theme};} .esriPopup .titlePane{background-color:${theme};color:${color};} .esriPopup .titleButton{color:${color};} .ab{background-color:${buttonBg};}  .bb{background-color:${buttonBg}!important;} .panel_content{background-color:${bodyBg}; color:${bodyColor};} .content-pane-left{background:${bodyBg}; color:${bodyColor};} .ac-container label{color:${buttonColor} !important;}}");
+      if (themeCss) {
+        var style = document.createElement("style");
+        style.appendChild(document.createTextNode(themeCss));
+        document.head.appendChild(style);
       }
+      this._drawer.resize();
+      registry.byId("border_container").resize();
     },
-    _setColor: function(color) {
-      var rgb = Color.fromHex(color).toRgb();
-      var outputColor = null;
-      if (has("ie") < 9) {
-        outputColor = color;
+    _setColor: function (value) {
+      var colorValue = null,
+        rgb;
+      if (!value) {
+        colorValue = new Color("transparent");
       } else {
-        //rgba supported so add
-        rgb.push(0.9);
-        outputColor = Color.fromArray(rgb);
-
+        rgb = Color.fromHex(value).toRgb();
+        if (has("ie") == 8) {
+          colorValue = value;
+        } else {
+          rgb.push(0.9);
+          colorValue = Color.fromArray(rgb);
+        }
       }
-      return outputColor;
+      return colorValue;
     },
 
-    _getBasemapName: function(name) {
-      var current = null;
-      switch (name) {
-        case "dark-gray":
-          current = "Dark Gray Canvas";
-          break;
-        case "gray":
-          current = "Light Gray Canvas";
-          break;
-        case "hybrid":
-          current = "Imagery with Labels";
-          break;
-        case "national-geographic":
-          current = "National Geographic";
-          break;
-        case "oceans":
-          current = "Oceans";
-          break;
-        case "osm":
-          current = "OpenStreetMap";
-          break;
-        case "satellite":
-          current = "Imagery";
-          break;
-        case "streets":
-          current = "Streets";
-          break;
-        case "terrain":
-          current = "Terrain with Labels";
-          break;
-        case "topo":
-          current = "Topographic";
-          break;
+    _getBasemapName: function (name) {
+      // We have to do this because of localized strings we need 
+      // a better solution 
+      var current = "Streets";
+      if (name === "dark-gray" || name === "dark-gray-vector") {
+        current = "Dark Gray Canvas";
+      } else if (name === "gray" || name === "gray-vector") {
+        current = "Light Gray Canvas";
+      } else if (name === "hybrid") {
+        current = "Imagery with Labels";
+      } else if (name === "national-geographic") {
+        current = "National Geographic";
+      } else if (name === "oceans") {
+        current = "Oceans";
+      } else if (name === "osm") {
+        current = "OpenStreetMap";
+      } else if (name === "satellite") {
+        current = "Imagery";
+      } else if (name === "streets" || name === "streets-vector") {
+        current = "Streets";
+      } else if (name === "streets-navigation-vector") {
+        current = "World Navigation Map";
+      } else if (name === "streets-night-vector") {
+        current = "World Street Map (Night)";
+      } else if (name === "streets-relief-vector") {
+        current = "World Street Map (with Relief)";
+      } else if (name === "terrain") {
+        current = "Terrain with Labels";
+      } else if (name === "topo" || name === "topo-vector") {
+        current = "Topographic";
       }
       return current;
     },
 
-    _setLevel: function(options) {
+    _setLevel: function (options) {
       var level = this.config.level;
       //specify center and zoom if provided as url params
       if (level) {
@@ -451,7 +531,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
       return options;
     },
 
-    _setCenter: function(options) {
+    _setCenter: function (options) {
       var center = this.config.center;
       if (center) {
         var points = center.split(",");
@@ -462,7 +542,7 @@ define(["dojo/_base/declare", "dojo/has", "dojo/_base/lang", "dojo/_base/kernel"
       return options;
     },
 
-    _setExtent: function(info) {
+    _setExtent: function (info) {
       var e = this.config.extent;
       //If a custom extent is set as a url parameter handle that before creating the map
       if (e) {

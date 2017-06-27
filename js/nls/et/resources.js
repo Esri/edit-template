@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Veebikaart ei sisalda ühtegi muudetavat kihti.",
+    "noEditPrivileges": "Teie konto tasemel puudub redigeerimise õigus ning täiendava abi saamiseks palume pöörduda administraatori poole.",
     "error": "Kaarti ei saa luua"
   },
   "tools": {
+    "edit": "Muuda",
     "popup": {
       "title": "Teave",
       "instructions": "Valige detailide kuvamiseks kaardil objekt."

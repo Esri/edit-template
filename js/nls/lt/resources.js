@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Šiame internetiniame žemėlapyje nėra redaguojamų sluoksnių.",
+    "noEditPrivileges": "Jūsų paskyra neturi redagavimo teisės, jei reikia daugiau pagalbos, susisiekite su administratoriumi.",
     "error": "Žemėlapio sukurti nepavyko"
   },
   "tools": {
+    "edit": "Redaguoti",
     "popup": {
       "title": "Informacija",
       "instructions": "Informacijos peržiūrai žemėlapyje pasirinkite elementą."

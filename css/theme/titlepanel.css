@@ -1,0 +1,40 @@
+.top-bar {
+    position: absolute;
+    width: auto;
+    background: transparent;
+    height: auto;
+    z-index: 2;
+}
+
+.drawer-open .content-pane-left {
+    width: 20%;
+    padding-right: 5px !important;
+    overflow-x: hidden;
+    border-right: 1px solid #ddd;
+}
+
+.content-pane-left {
+    max-width: 20%;
+}
+
+.title-bar {
+    height: auto;
+    margin: 0 4px 0 4px;
+    border-bottom: solid 1px #ddd;
+}
+
+.claro .dijitToolbar {
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+#editorDiv,
+.esriEditor,
+.templatePicker {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

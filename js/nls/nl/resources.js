@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Webmap bevat geen bewerkbare lagen.",
+    "noEditPrivileges": "Uw account heeft geen bewerkingsmachtigingen, neem contact op met uw beheerder voor verdere assistentie.",
     "error": "Kan geen kaart creëren"
   },
   "tools": {
+    "edit": "Bewerken",
     "popup": {
       "title": "Info",
       "instructions": "Selecteer een object op de kaart om de details te bekijken."

@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Diese Webkarte enthält keine editierbaren Layer.",
+    "noEditPrivileges": "Ihrem Konto sind keine Bearbeitungsberechtigungen zugewiesen. Wenden Sie sich an den Administrator Ihrer Organisation, falls Sie weitere Unterstützung benötigen.",
     "error": "Karte kann nicht erstellt werden"
   },
   "tools": {
+    "edit": "Bearbeiten",
     "popup": {
       "title": "Info",
       "instructions": "Wählen Sie ein Feature auf der Karte aus, um Details anzuzeigen."

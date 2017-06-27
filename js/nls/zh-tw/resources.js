@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "此 Web 地圖不包含任何可編輯圖層。",
+    "noEditPrivileges": "您的帳號沒有編輯權限，請聯絡您的管理員以取得進一步協助。",
     "error": "無法建立地圖"
   },
   "tools": {
+    "edit": "編輯",
     "popup": {
       "title": "資訊",
       "instructions": "在地圖上選擇圖徵以查看詳細資訊。"

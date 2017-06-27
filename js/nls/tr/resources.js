@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Bu web haritasında düzenlenebilir katman yok.",
+    "noEditPrivileges": "Hesabınızın düzenleme ayrıcalığı yok, daha ayrıntılı yardım için yöneticinize başvurun.",
     "error": "Harita oluşturulamıyor"
   },
   "tools": {
+    "edit": "Düzenle",
     "popup": {
       "title": "Bilgi",
       "instructions": "Ayrıntıları görüntülemek için haritada bir detay seçin."

@@ -16,15 +16,15 @@
  */
 define({
   "map": {
-    "noEditLayers": "此 Web 地图不包含任何可编辑图层。",
-    "noEditPrivileges": "您的帐户无编辑权限，请联系您的管理员获取进一步帮助。",
-    "error": "无法创建地图"
+    "noEditLayers": "Peta web tidak berisi lapisan yang dapat diedit.",
+    "noEditPrivileges": "Akun Anda tidak memiliki hak mengedit, hubungi administrator Anda untuk meminta bantuan lebih lanjut.",
+    "error": "Tidak dapat membuat peta"
   },
   "tools": {
-    "edit": "编辑",
+    "edit": "Edit",
     "popup": {
-      "title": "信息",
-      "instructions": "在地图上选择要素以查看详细信息。"
+      "title": "Info",
+      "instructions": "Pilih fitur di peta untuk melihat detailnya."
     }
   }
 });

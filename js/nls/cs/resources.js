@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Tato webová mapa neobsahuje žádné editovatelné vrstvy.",
+    "noEditPrivileges": "Váš účet nemá oprávnění k úpravám. Požádejte o pomoc svého správce.",
     "error": "Nelze vytvořit mapu"
   },
   "tools": {
+    "edit": "Upravit",
     "popup": {
       "title": "Informace",
       "instructions": "Vyberte prvek na mapě, jehož podrobnosti chcete zobrazit."

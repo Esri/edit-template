@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Web kartē nav ietverts neviens rediģējams slānis.",
+    "noEditPrivileges": "Jūsu kontam nav labošanas privilēģiju; sazinieties ar administratoru un lūdziet plašāku palīdzību.",
     "error": "Nevar izveidot karti"
   },
   "tools": {
+    "edit": "Labot",
     "popup": {
       "title": "Informācija",
       "instructions": "Izvēlieties elementu kartē, lai skatītu detaļas."

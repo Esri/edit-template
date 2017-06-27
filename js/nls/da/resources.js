@@ -17,11 +17,13 @@
 define({
   "map": {
     "noEditLayers": "Webkortet indeholder ikke nogen redigérbare lag.",
+    "noEditPrivileges": "Din konto har ikke redigeringsrettigheder, kontakt din administrator for yderligere assistance.",
     "error": "Kan ikke oprette kort"
   },
   "tools": {
+    "edit": "Redigér",
     "popup": {
-      "title": "Oplysninger",
+      "title": "Info",
       "instructions": "Vælg et objekt på kortet for at få vist oplysninger."
     }
   }

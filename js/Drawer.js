@@ -1,5 +1,5 @@
 define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dijit/_WidgetBase", "dojo/on", "dojo/dom", "dojo/dom-class", "dojo/dom-construct", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/Deferred", "dojo/window"], function (
-Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderContainer, ContentPane, Deferred, win) {
+    Evented, declare, lang, _WidgetBase, on, dom, domClass, domConstruct, BorderContainer, ContentPane, Deferred, win) {
     var Widget = declare("application.Drawer", [_WidgetBase, Evented], {
         options: {
             showDrawerSize: 850,

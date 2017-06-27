@@ -1,0 +1,120 @@
+.top-bar {
+    position: absolute;
+    z-index: 36;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.9);
+    height: 44px;
+}
+
+.esriRTL .top-bar {
+    left: auto;
+    right: 0;
+}
+
+.top-menu-right {
+    margin-right: 5px;
+}
+
+.esriRTL .top-menu-right {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.drawer-open .content-pane-left {
+    width: 224px;
+    padding-right: 5px !important;
+    overflow-x: hidden;
+    border-right: 1px solid #ddd;
+}
+
+@media screen and (max-width: 600px) {
+    .drawer-open #title {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .drawer-open #title {
+        display: none;
+    }
+}
+
+.content-pane-left {
+    max-width: 230px;
+}
+
+.app-title {
+    color: #007ac2;
+    line-height: 44px;
+    font-size: 18px;
+    font-weight: 700;
+    max-width: 40%;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    float: left;
+}
+
+.esriRTL .app-title {
+    float: right;
+}
+
+#title {
+    width: 80%;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.templatePicker {
+    padding: 10px 10px 0 10px;
+    width: 100%;
+    height: auto;
+    border: none;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.edit-toolbar .templatePicker {
+    padding-top: 40px;
+}
+
+.templatePicker {
+    padding-top: 25px;
+}
+
+.edit-toolbar .esriEditor .esriDrawingToolbar {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    padding-bottom: 11px;
+    padding-top: 11px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.templatePicker {
+    padding: 10px 10px 0 10px;
+    border: none;
+    margin: auto;
+}
+
+.esriEditor {
+    width: 100%;
+    height: 100%;
+}

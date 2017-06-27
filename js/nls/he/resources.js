@@ -16,10 +16,12 @@
  */
 define({
   "map": {
-    "noEditLayers": "wweb map זה אינו מכיל שכבות שניתן לערוך.",
+    "noEditLayers": "wweb map זה אינו מכיל שכבות ניתנות לעריכה.",
+    "noEditPrivileges": "לחשבונך אין הרשאת עריכה, פנה למנהל המערכת כדי לקבל סיוע נוסף.",
     "error": "לא ניתן ליצור מפה"
   },
   "tools": {
+    "edit": "ערוך",
     "popup": {
       "title": "מידע",
       "instructions": "בחר ישות במפה להצגת פרטים."

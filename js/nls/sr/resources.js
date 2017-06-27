@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Ova veb mapa ne sadrži slojeve koji mogu da se uređuju.",
+    "noEditPrivileges": "Vaš nalog nema privilegije za uređivanje, obratite se svom administratoru za dalju pomoć,",
     "error": "Kreiranje mape nije moguće"
   },
   "tools": {
+    "edit": "Izmeni",
     "popup": {
       "title": "Informacije",
       "instructions": "Izaberite geoobjekat na mapi da vidite detalje."

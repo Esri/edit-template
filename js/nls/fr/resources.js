@@ -17,11 +17,13 @@
 define({
   "map": {
     "noEditLayers": "Cette carte Web ne contient pas de couches modifiables.",
+    "noEditPrivileges": "Votre compte ne possède pas de privilèges de mise à jour. Contactez votre administrateur pour obtenir de l'aide.",
     "error": "Impossible de créer la carte"
   },
   "tools": {
+    "edit": "Modifie",
     "popup": {
-      "title": "Informations",
+      "title": "Infos",
       "instructions": "Sélectionnez une entité sur la carte pour afficher ses détails."
     }
   }

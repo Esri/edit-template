@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Este mapa web no contiene ninguna capa editable.",
+    "noEditPrivileges": "Su cuenta no tiene privilegios de edición. Póngase en contacto con el administrador para obtener más ayuda.",
     "error": "No se puede crear el mapa"
   },
   "tools": {
+    "edit": "Editar",
     "popup": {
       "title": "Información",
       "instructions": "Selecciona una entidad en el mapa para ver los detalles."

@@ -17,9 +17,11 @@
 define({
   "map": {
     "noEditLayers": "Mapa internetowa nie zawiera warstw edytowalnych.",
+    "noEditPrivileges": "Twoje konto nie ma uprawnień do edycji, aby uzyskać dalszą pomoc, skontaktuj się z administratorem.",
     "error": "Nie można utworzyć mapy"
   },
   "tools": {
+    "edit": "Edytuj",
     "popup": {
       "title": "Informacje",
       "instructions": "Wybierz obiekt na mapie, aby wyświetlić szczegóły."
