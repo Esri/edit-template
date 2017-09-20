@@ -2,17 +2,19 @@
 	"configurationSettings": [{
 		"category": "General",
 		"fields": [{
-			"type": "webmap"
-		}, {
-			"type": "appproxies"
-		}, 
-		 {
-			"placeHolder": "Defaults to web map title",
-			"label": "Title:",
-			"fieldName": "title",
-			"type": "string",
-			"tooltip": "Defaults to web map title"
-		}]
+				"type": "webmap",
+				"conditions": ["edit"]
+			}, {
+				"type": "appproxies"
+			},
+			{
+				"placeHolder": "Defaults to web map title",
+				"label": "Title:",
+				"fieldName": "title",
+				"type": "string",
+				"tooltip": "Defaults to web map title"
+			}
+		]
 	}, {
 		"category": "Theme",
 		"fields": [{
