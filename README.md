@@ -29,7 +29,7 @@ Edit is a configurable application template that enables you to provide basic ed
 
 - [ArcGIS API for JavaScript Resource Center](https://developers.arcgis.com/javascript/)
 - [ArcGIS Online](http://www.arcgis.com)
-- Want to create your own template? View the [Application Boilerplate](https://github.com/Esri/application-boilerplate-js) to get started.
+- Want to create your own template? View the [Application Base](https://github.com/Esri/application-base-js) to get started.
 - [View the Edit template on ArcGIS Online](http://www.arcgis.com/home/item.html?id=2a9fbd75eea14c87a32d3799e00663f2)
 
 ## Issues
