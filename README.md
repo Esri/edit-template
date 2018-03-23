@@ -1,47 +1,46 @@
-edit-template
-=============
+# edit-template
 
 Edit is a configurable application template that enables you to provide basic editing capabilites for editable layers in a web map.
 
-
 [View it live](http://www.arcgis.com/apps/Edit/index.html?webmap=25977874c66c4c0a8dcc181506c6fb45)
 
+## Features
 
-#Features
 **Edit** is a configurable application template that enables you to provide basic editing capabilites for editable layers in a web map. The template can be configured using the following options:
 
-- **Map:**Choose the web map used in your application.
+- **Map:** Choose the web map used in your application.
 - **Color Scheme:** Choose the application color scheme (Blue, Black, or Green).
-- **Show Toolbar:**Display an editing toolbar.
+- **Show Toolbar:** Display an editing toolbar.
 
+## Instructions
 
-#Instructions
-
-1. Download and unzip the .zip file or clone the repo. 
+1. Download and unzip the .zip file or clone the repo.
 2. Web-enable the directory
-3. Access the .html page 
-4. See the readme.html page for more details. 
+3. Access the .html page
+4. See the readme.html page for more details.
 
-
-#Requirements
+## Requirements
 
 - Notepad or HTML editor
 - Some background with HTML, CSS and JavaScript
-- Experience with the ArcGIS API for JavaScript is helpful. 
+- Experience with the ArcGIS API for JavaScript is helpful.
 
-#Resources
+## Resources
 
-- [ArcGIS API for JavaScript Resource Center](http://help.arcgis.com/en/webapi/javascript/arcgis/index.html)
-- [ArcGIS Online] (http://www.arcgis.com)
-- Want to create your own template? View the [Application Boilerplate](https://github.com/Esri/application-boilerplate-js) to get started. 
+- [ArcGIS API for JavaScript Resource Center](https://developers.arcgis.com/javascript/)
+- [ArcGIS Online](http://www.arcgis.com)
+- Want to create your own template? View the [Application Boilerplate](https://github.com/Esri/application-boilerplate-js) to get started.
 - [View the Edit template on ArcGIS Online](http://www.arcgis.com/home/item.html?id=2a9fbd75eea14c87a32d3799e00663f2)
-#Issues
-Found a bug or want to request a new feature? Please let us know by submitting an issue. 
 
-#Contributing
-Anyone and everyone is welcome to contribute. 
+## Issues
 
-#Licensing 
+Found a bug or want to request a new feature? Please let us know by submitting an issue.
+
+## Contributing
+
+Anyone and everyone is welcome to contribute.
+
+## Licensing
 
 Copyright 2012 Esri
 
