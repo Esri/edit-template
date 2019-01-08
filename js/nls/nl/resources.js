@@ -18,7 +18,11 @@ define({
   "map": {
     "noEditLayers": "Webmap bevat geen bewerkbare lagen.",
     "noEditPrivileges": "Uw account heeft geen bewerkingsmachtigingen, neem contact op met uw beheerder voor verdere assistentie.",
-    "error": "Kan geen kaart creëren"
+    "error": "Kan geen kaart creëren",
+    "licenseError": {
+      "message": "Uw account heeft geen licentie om configureerbare apps te gebruiken die niet openbaar zijn. Vraag uw organisatiebeheerder om u een gebruikerstype toe te wijzen dat Essential Apps of een add-on Essential Apps-licentie bevat.",
+      "title": "Geen licentie"
+    }
   },
   "tools": {
     "edit": "Bewerken",

@@ -99,23 +99,19 @@
     .app-loading .content-pane-left {
         width: 0;
     }
-
     .drawer-open #title {
         display: none;
     }
-
     .esriPopup.light.esriPopupVisible.esriPopupMaximized {
         top: 60px !important;
         margin-bottom: 55px;
     }
-
     .esriPopup.light.esriPopupVisible.esriPopupMaximized>div.esriPopupWrapper>div.sizer.content>div {
         max-height: initial !important;
         height: auto !important;
     }
-
     .arcgisSearch .hasButtonMode.searchExpanded .searchExpandContainer,
-  .arcgisSearch .hasButtonMode .searchAnimate {
+    .arcgisSearch .hasButtonMode .searchAnimate {
         width: 190px;
     }
 }
@@ -126,10 +122,10 @@
 
 @font-face {
     font-family: 'editor_fonts';
-  src: url("../fonts/icomoon.eot?-idvs4c");
-  src: url("../fonts/icomoon.eot?#iefix-idvs4c") format('embedded-opentype'), url("../fonts/icomoon.woff?-idvs4c") format('woff'), url("../fonts/icomoon.ttf?-idvs4c") format('truetype'), url("../fonts/icomoon.svg?-idvs4c#icomoon") format('svg');
-  font-weight: normal;
-  font-style: normal;
+    src: url("../fonts/icomoon.eot?-idvs4c");
+    src: url("../fonts/icomoon.eot?#iefix-idvs4c") format('embedded-opentype'), url("../fonts/icomoon.woff?-idvs4c") format('woff'), url("../fonts/icomoon.ttf?-idvs4c") format('truetype'), url("../fonts/icomoon.svg?-idvs4c#icomoon") format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 [class^="icon-"],
@@ -141,7 +137,7 @@
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-  /* Better Font Rendering =========== */
+    /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -299,6 +295,11 @@ body {
     left: 60px;
 }
 
+.esriRTL .esriAttributeInspector .atiDeleteButton {
+    float: right;
+    margin-right:10px;
+}
+
 .claro .dijitButton .dijitButtonNode,
 .claro .dijitDropDownButton .dijitButtonNode,
 .claro .dijitComboButton .dijitButtonNode,
@@ -374,7 +375,7 @@ body {
 }
 
 .loading-indicator {
-  /* Loading status */
+    /* Loading status */
     display: none;
     height: 100%;
     width: 100%;
@@ -388,19 +389,19 @@ body {
 
 .app-loading .loading-indicator,
 .app-error .loading-indicator {
-  /* Show this class when loading or error */
+    /* Show this class when loading or error */
     display: block;
 }
 
 .app-loading .loading-indicator {
-  /* Loading image */
+    /* Loading image */
     background-position: center center;
     background-image: url("../images/ajax-loader.gif");
     background-repeat: no-repeat;
 }
 
 .app-error .loading-message {
-  /* Error status */
+    /* Error status */
     background-position: top center;
     background-image: url("../images/error.png");
     background-repeat: no-repeat;

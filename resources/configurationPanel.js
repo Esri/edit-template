@@ -67,7 +67,7 @@
 			"label": "Display Edit Toolbar"
 		}, {
 			"type": "paragraph",
-			"value": "Enable the Locate Button to add a button to the map that allows users to identify thier current location. To track the users current location set Locate Button and Location Tracking to true."
+			"value": "Enable the Locate Button to add a button to the map that allows users to identify their current location. To track the users current location set Locate Button and Location Tracking to true."
 		}, {
 			"type": "boolean",
 			"fieldName": "locate",

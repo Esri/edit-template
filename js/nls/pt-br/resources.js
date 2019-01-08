@@ -18,7 +18,11 @@ define({
   "map": {
     "noEditLayers": "Este mapa da web não contém quaisquer camadas editáveis.",
     "noEditPrivileges": "Sua conta não tem privilégios de edição, entre em contato com seu administrador para ajuda adicional.",
-    "error": "Não foi possível criar o mapa"
+    "error": "Não foi possível criar o mapa",
+    "licenseError": {
+      "message": "Sua conta não está licenciada para utilizar Aplicativos Configuráveis que não sejam públicos. Solicite ao administrador da sua organização que lhe atribua um tipo de usuário que inclua os Aplicativos Fundamentais ou uma licença complementar dos Aplicativos Fundamentais.",
+      "title": "Não Licenciado"
+    }
   },
   "tools": {
     "edit": "Editar",

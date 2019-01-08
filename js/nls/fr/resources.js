@@ -18,7 +18,11 @@ define({
   "map": {
     "noEditLayers": "Cette carte Web ne contient pas de couches modifiables.",
     "noEditPrivileges": "Votre compte ne possède pas de privilèges de mise à jour. Contactez votre administrateur pour obtenir de l'aide.",
-    "error": "Impossible de créer la carte"
+    "error": "Impossible de créer la carte",
+    "licenseError": {
+      "message": "La licence de votre compte ne permet pas d’utiliser des applications configurables non publiques. Demandez à l’administrateur de votre organisation de vous attribuer un type d’utilisateur qui inclut une licence Essential Apps ou une licence Essential Apps additionnelle.",
+      "title": "Pas de licence"
+    }
   },
   "tools": {
     "edit": "Modifie",

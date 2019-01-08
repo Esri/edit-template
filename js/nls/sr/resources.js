@@ -18,7 +18,11 @@ define({
   "map": {
     "noEditLayers": "Ova veb mapa ne sadrži slojeve koji mogu da se uređuju.",
     "noEditPrivileges": "Vaš nalog nema privilegije za uređivanje, obratite se svom administratoru za dalju pomoć,",
-    "error": "Kreiranje mape nije moguće"
+    "error": "Kreiranje mape nije moguće",
+    "licenseError": {
+      "message": "Vaš nalog nema licencu za korišćenje aplikacija koje mogu da se konfigurišu i nisu javne. Zatražite od administratora organizacije da vam dodeli onaj tip korisnika koji uključuje osnovne aplikacije ili licencu za dodatne osnovne aplikacije.",
+      "title": "Nema licencu"
+    }
   },
   "tools": {
     "edit": "Izmeni",

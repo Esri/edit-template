@@ -18,7 +18,11 @@ define({
   "map": {
     "noEditLayers": "Bu web haritasında düzenlenebilir katman yok.",
     "noEditPrivileges": "Hesabınızın düzenleme ayrıcalığı yok, daha ayrıntılı yardım için yöneticinize başvurun.",
-    "error": "Harita oluşturulamıyor"
+    "error": "Harita oluşturulamıyor",
+    "licenseError": {
+      "message": "Hesabınız herkese açık olmayan Yapılandırılabilir Uygulamaları kullanmak için lisanslandırılmamış. Lütfen kuruluş yöneticinizden Temel Uygulamalar veya eklenti Temel Uygulamalar lisansı içeren bir kullanıcı türü atamasını isteyin.",
+      "title": "Lisanslı Değil"
+    }
   },
   "tools": {
     "edit": "Düzenle",

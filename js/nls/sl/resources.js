@@ -16,19 +16,19 @@
  */
 define({
   "map": {
-    "noEditLayers": "此 Web 地圖不包含任何可編輯圖層。",
-    "noEditPrivileges": "您的帳號沒有編輯權限，請聯絡您的管理員以取得進一步協助。",
-    "error": "無法建立地圖",
+    "noEditLayers": "Ta spletna karta ne vsebuje nobenih uredljivih slojev.",
+    "noEditPrivileges": "Vaš račun nima pravice za urejanje. Za nadaljnjo pomoč se obrnite na administratorja.",
+    "error": "Karte ni mogoče ustvariti",
     "licenseError": {
-      "message": "您的帳號未經授權，無法使用非公開的可配置應用程式。 請聯繫您的組織管理員，請其將包含基礎應用程式或附加元件基礎應用程式授權的使用者類型指派給您。",
-      "title": "未經許可"
+      "message": "Vaš račun ni licenciran za uporabo konfigurabilnih aplikacij, ki niso javne. Prosite administratorja v vaši organizaciji, da vam dodeli tip uporabnika, ki vsebuje aplikacije Essential Apps ali licenco za dodatne aplikacije Essential Apps.",
+      "title": "Brez licence"
     }
   },
   "tools": {
-    "edit": "編輯",
+    "edit": "Uredi",
     "popup": {
-      "title": "資訊",
-      "instructions": "在地圖上選擇圖徵以查看詳細資訊。"
+      "title": "Informacije",
+      "instructions": "Za ogled podrobnosti izberite geoobjekt na karti."
     }
   }
 });

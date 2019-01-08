@@ -4,7 +4,6 @@
 <head>
   <title></title>
   <meta charset="utf-8">
-  <meta name="fragment" content="!">
   <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
@@ -12,8 +11,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <!-- End Responsive -->
   <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
-  <link rel="stylesheet" href="https://js.arcgis.com/3.22/dijit/themes/claro/claro.css">
-  <link rel="stylesheet" href="https://js.arcgis.com/3.22/esri/css/esri.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.27/dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.27/esri/css/esri.css">
   <!-- Load any application specific styles -->
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -54,8 +53,9 @@
     if (location.search.match(/locale=([\w\-]+)/)) {
       dojoConfig.locale = RegExp.$1;
     }
+
   </script>
-  <script type="text/javascript" src="https://js.arcgis.com/3.22/"></script>
+  <script type="text/javascript" src="https://js.arcgis.com/3.27/"></script>
   <script type="text/javascript">
     require([
       "config/templateConfig",
@@ -81,6 +81,7 @@
         myApp.reportError(error);
       });
     });
+
   </script>
 </body>
 

@@ -18,7 +18,11 @@ define({
   "map": {
     "noEditLayers": "Diese Webkarte enthält keine editierbaren Layer.",
     "noEditPrivileges": "Ihrem Konto sind keine Bearbeitungsberechtigungen zugewiesen. Wenden Sie sich an den Administrator Ihrer Organisation, falls Sie weitere Unterstützung benötigen.",
-    "error": "Karte kann nicht erstellt werden"
+    "error": "Karte kann nicht erstellt werden",
+    "licenseError": {
+      "message": "Ihr Konto ist nicht für die Verwendung von nicht öffentlichen konfigurierbaren Apps lizenziert. Bitten Sie den Administrator der Organisation, Ihnen einen Benutzertyp mit Essential Apps oder eine Add-On-Lizenz für Essential Apps zuzuweisen.",
+      "title": "Nicht lizenziert"
+    }
   },
   "tools": {
     "edit": "Bearbeiten",
