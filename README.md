@@ -1,4 +1,6 @@
-# edit-template
+
+ArcGIS Configurable Apps will be retired in 2025. The ArcGIS Configurable Apps source code repro is deprecated and will not receive further updates. In addition, this repository will be removed in October 2025, along with the October 2025 ArcGIS Online update.
+# Deprecated: edit-template
 
 Edit is a configurable application template that enables you to provide basic editing capabilites for editable layers in a web map.
 
